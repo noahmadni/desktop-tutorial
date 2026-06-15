@@ -1,0 +1,131 @@
+{
+  "hero": {
+    "headline": "Reveal Your Natural Beauty with C Beauty",
+    "subheadline": "Premium skincare, beauty treatments, and expert consultations designed for healthy, radiant skin.",
+    "btn1": "Book Consultation",
+    "btn2": "Shop Products"
+  },
+  "about": {
+    "title": "About C Beauty",
+    "story": "C Beauty was founded with a passion for helping every woman reveal her most radiant, confident self. We combine cutting-edge skincare science with natural ingredients to deliver real, visible results.",
+    "mission": "Our mission is to make premium skincare accessible, educational, and effective — empowering women across Sudan and the GCC to love the skin they're in.",
+    "stats": {
+      "customers": "10000",
+      "products": "500",
+      "consultations": "8000",
+      "satisfaction": "98"
+    }
+  },
+  "contact": {
+    "whatsapp": "+249123456789",
+    "email": "hello@cbeautysd.com",
+    "phone": "+249123456789",
+    "instagram": "https://instagram.com/cbeautysd",
+    "tiktok": "https://tiktok.com/@cbeautysd",
+    "snapchat": "https://snapchat.com/add/cbeautysd",
+    "facebook": "https://facebook.com/cbeautysd"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Glow Cleansing Foam",
+      "category": "cleansers",
+      "price": "45",
+      "rating": 5,
+      "description": "Gentle daily cleanser for all skin types",
+      "image": ""
+    },
+    {
+      "id": 2,
+      "name": "Rose Gold Moisturizer",
+      "category": "moisturizers",
+      "price": "75",
+      "rating": 5,
+      "description": "Deep hydration with rose extract",
+      "image": ""
+    },
+    {
+      "id": 3,
+      "name": "UV Shield SPF50+",
+      "category": "sunscreens",
+      "price": "60",
+      "rating": 4,
+      "description": "Lightweight broad-spectrum sun protection",
+      "image": ""
+    },
+    {
+      "id": 4,
+      "name": "Vitamin C Serum",
+      "category": "serums",
+      "price": "90",
+      "rating": 5,
+      "description": "Brightening serum with 15% Vitamin C",
+      "image": ""
+    },
+    {
+      "id": 5,
+      "name": "Clear Skin Spot Treatment",
+      "category": "acne",
+      "price": "40",
+      "rating": 4,
+      "description": "Fast-acting acne spot corrector",
+      "image": ""
+    },
+    {
+      "id": 6,
+      "name": "Lumina Brightening Cream",
+      "category": "whitening",
+      "price": "85",
+      "rating": 5,
+      "description": "Even skin tone and reduce dark spots",
+      "image": ""
+    },
+    {
+      "id": 7,
+      "name": "Argan Hair Oil",
+      "category": "hair",
+      "price": "55",
+      "rating": 4,
+      "description": "Nourishing Moroccan argan oil treatment",
+      "image": ""
+    },
+    {
+      "id": 8,
+      "name": "Silk Body Lotion",
+      "category": "body",
+      "price": "50",
+      "rating": 5,
+      "description": "Luxurious all-day body moisture",
+      "image": ""
+    },
+    {
+      "id": 9,
+      "name": "Rose Hip Natural Oil",
+      "category": "natural",
+      "price": "70",
+      "rating": 5,
+      "description": "100% pure rosehip seed oil",
+      "image": ""
+    }
+  ],
+  "services": [
+    {"name": "Skin Analysis", "icon": "🔬", "description": "Advanced skin assessment using latest technology to identify your skin type and concerns.", "benefits": "Personalized results · 30 min session · Expert report"},
+    {"name": "Facial Treatments", "icon": "✨", "description": "Customized facials targeting hydration, brightening, and rejuvenation.", "benefits": "Instant glow · Deep cleanse · Relaxing"},
+    {"name": "Acne Treatment", "icon": "💊", "description": "Medical-grade acne solutions combining topical and professional treatments.", "benefits": "Clear skin · Reduce scarring · Prevent breakouts"},
+    {"name": "Pigmentation Treatment", "icon": "🌟", "description": "Target dark spots, melasma and uneven skin tone with proven protocols.", "benefits": "Even tone · Fade spots · Brighter skin"},
+    {"name": "Anti-Aging Programs", "icon": "⏰", "description": "Comprehensive programs to reduce fine lines and restore youthful radiance.", "benefits": "Firmer skin · Reduce wrinkles · Collagen boost"},
+    {"name": "Skin Brightening", "icon": "💫", "description": "Brighten dull skin with our signature C Beauty glow protocol.", "benefits": "Luminous glow · Even tone · Hydration"},
+    {"name": "Beauty Consultations", "icon": "💄", "description": "One-on-one sessions with our certified beauty experts.", "benefits": "Expert advice · Personalized plan · Follow-up"},
+    {"name": "Hair Care Consultations", "icon": "💇", "description": "Professional hair and scalp analysis with treatment recommendations.", "benefits": "Healthier hair · Scalp care · Growth tips"},
+    {"name": "Personalized Skincare Plans", "icon": "📋", "description": "Custom 30/60/90-day skincare plans tailored to your goals.", "benefits": "Step-by-step plan · Product guide · Progress tracking"},
+    {"name": "Online Consultation", "icon": "💻", "description": "Expert skincare consultations from the comfort of your home via video call.", "benefits": "Convenient · Same day · WhatsApp follow-up"}
+  ],
+  "testimonials": [
+    {"name": "Sara Al-Rashid", "rating": 5, "text": "C Beauty completely transformed my skin! My acne is gone and I finally feel confident without makeup.", "date": "March 2025"},
+    {"name": "Nour Hassan", "rating": 5, "text": "The online consultation was so convenient and professional. The personalized plan worked wonders!", "date": "February 2025"},
+    {"name": "Lina Mohammed", "rating": 5, "text": "Best skincare brand I've ever tried. The Vitamin C serum changed my skin in just 2 weeks!", "date": "January 2025"},
+    {"name": "Fatima Al-Zahra", "rating": 5, "text": "Amazing products and incredible customer service. Highly recommend C Beauty to everyone!", "date": "April 2025"},
+    {"name": "Rana Khalid", "rating": 5, "text": "The anti-aging program gave me visible results in 30 days. I look 10 years younger!", "date": "March 2025"},
+    {"name": "Maya Ibrahim", "rating": 5, "text": "Professional, caring and results-driven. C Beauty is truly the best in Sudan!", "date": "May 2025"}
+  ]
+}
