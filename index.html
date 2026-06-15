@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C Beauty – Where Beauty Meets Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose-gold: #C9A96E;
+  --rose-gold-light: #E8C9A0;
+  --white: #FFFFFF;
+  --nude-beige: #F5E6D3;
+  --luxury-gold: #D4AF37;
+  --dark: #1a1a1a;
+  --dark2: #2d2d2d;
+  --gradient: linear-gradient(135deg, #C9A96E, #E8C9A0, #D4AF37);
+  --glass-bg: rgba(255,255,255,0.15);
+  --glass-border: rgba(255,255,255,0.25);
+  --shadow: 0 8px 32px rgba(201,169,110,0.18);
+  --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:#fff;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+ul{list-style:none;}
+.container{width:90%;max-width:1200px;margin:0 auto;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-size:clamp(2rem,4vw,2.8rem);color:var(--dark);margin-bottom:14px;}
+.section-title h2 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-title p{color:#666;font-size:1.05rem;max-width:560px;margin:0 auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.95rem;cursor:pointer;transition:var(--transition);border:none;outline:none;}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:0 4px 20px rgba(201,169,110,0.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(201,169,110,0.55);}
+.btn-outline{background:transparent;color:var(--rose-gold);border:2px solid var(--rose-gold);}
+.btn-outline:hover{background:var(--rose-gold);color:#fff;transform:translateY(-3px);}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ===== NAVBAR ===== */
+#navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:18px 0;transition:var(--transition);}
+#navbar.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 4px 24px rgba(201,169,110,0.15);padding:12px 0;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:0.92rem;font-weight:500;color:var(--dark2);transition:var(--transition);position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient);transition:var(--transition);}
+.nav-links a:hover{color:var(--rose-gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-actions{display:flex;align-items:center;gap:16px;}
+.cart-btn{position:relative;background:none;border:none;cursor:pointer;font-size:1.3rem;transition:var(--transition);}
+.cart-btn:hover{transform:scale(1.15);}
+.cart-badge{position:absolute;top:-6px;right:-8px;background:var(--luxury-gold);color:#fff;font-size:0.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.lang-btn{background:var(--gradient);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:var(--transition);}
+.lang-btn:hover{opacity:0.85;transform:scale(1.05);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:26px;height:2px;background:var(--dark);border-radius:2px;transition:var(--transition);}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(255,255,255,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:var(--transition);}
+.mobile-menu.open{opacity:1;pointer-events:all;display:flex;}
+.mobile-menu a{font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--dark);transition:var(--transition);}
+.mobile-menu a:hover{color:var(--rose-gold);}
+
+/* ===== HERO ===== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#fff8f0 0%,#f5e6d3 50%,#ede0d0 100%);}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:120px 20px 60px;}
+.hero-badge{display:inline-block;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.35);color:var(--rose-gold);padding:8px 20px;border-radius:50px;font-size:0.82rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:28px;}
+.hero-content h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.18;color:var(--dark);margin-bottom:22px;max-width:780px;margin-left:auto;margin-right:auto;}
+.hero-content h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-content p{font-size:1.12rem;color:#555;max-width:520px;margin:0 auto 40px;line-height:1.75;}
+.hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+.scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:bounce 2s infinite;}
+.scroll-indicator span{font-size:0.75rem;color:#888;letter-spacing:1px;text-transform:uppercase;}
+.scroll-arrow{width:28px;height:28px;border-right:2px solid var(--rose-gold);border-bottom:2px solid var(--rose-gold);transform:rotate(45deg);animation:arrowPulse 1.4s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+@keyframes arrowPulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* ===== ABOUT ===== */
+#about{padding:110px 0;background:#fff;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.about-text .tag{display:inline-block;color:var(--rose-gold);font-size:0.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.about-text h2{font-size:clamp(2rem,3.5vw,2.8rem);line-height:1.25;margin-bottom:20px;}
+.about-text h2 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.about-text p{color:#555;line-height:1.85;margin-bottom:16px;font-size:1rem;}
+.about-text .btn{margin-top:12px;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.stat-card{background:var(--nude-beige);border-radius:20px;padding:32px 24px;text-align:center;transition:var(--transition);}
+.stat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.stat-number{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{font-size:0.88rem;color:#777;margin-top:6px;font-weight:500;}
+
+/* ===== SERVICES ===== */
+#services{padding:110px 0;background:linear-gradient(180deg,#fff8f2 0%,#fff 100%);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;}
+.service-card{background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:20px;padding:32px 24px;text-align:center;transition:var(--transition);cursor:default;}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 16px 48px rgba(201,169,110,0.22);border-color:rgba(201,169,110,0.4);}
+.service-icon{font-size:2.4rem;margin-bottom:14px;display:block;}
+.service-card h3{font-size:1.05rem;margin-bottom:10px;color:var(--dark);}
+.service-card p{font-size:0.85rem;color:#666;line-height:1.65;margin-bottom:16px;}
+.learn-more{font-size:0.82rem;font-weight:600;color:var(--rose-gold);border:none;background:none;cursor:pointer;transition:var(--transition);padding:0;font-family:'Inter',sans-serif;}
+.learn-more:hover{color:var(--luxury-gold);letter-spacing:0.5px;}
+
+/* ===== PRODUCTS ===== */
+#products{padding:110px 0;background:#fff;}
+.filter-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+.filter-tab{padding:9px 22px;border-radius:50px;border:1.5px solid #ddd;background:#fff;font-size:0.85rem;font-weight:500;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif;color:#555;}
+.filter-tab.active,.filter-tab:hover{background:var(--gradient);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(201,169,110,0.3);}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;}
+.product-card{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.07);transition:var(--transition);}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(201,169,110,0.2);}
+.product-card.hidden{display:none;}
+.product-img{height:220px;background:var(--gradient);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.product-img::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);}
+.product-img-icon{font-size:3.5rem;position:relative;z-index:1;}
+.wishlist-btn{position:absolute;top:14px;right:14px;width:34px;height:34px;background:rgba(255,255,255,0.85);border-radius:50%;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:var(--transition);z-index:2;}
+.wishlist-btn:hover{transform:scale(1.2);}
+.wishlist-btn.active{color:#e74c3c;}
+.product-info{padding:18px 20px;}
+.product-category{font-size:0.72rem;color:var(--rose-gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.product-name{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:8px;color:var(--dark);}
+.product-rating{display:flex;align-items:center;gap:4px;margin-bottom:10px;}
+.stars{color:var(--luxury-gold);font-size:0.85rem;}
+.rating-count{font-size:0.77rem;color:#999;}
+.product-price{font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:14px;}
+.product-price span{font-size:0.8rem;font-weight:400;color:#888;}
+.product-actions{display:flex;gap:10px;}
+.add-cart-btn{flex:1;padding:10px;background:var(--gradient);color:#fff;border:none;border-radius:12px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif;}
+.add-cart-btn:hover{transform:scale(1.03);box-shadow:0 4px 16px rgba(201,169,110,0.4);}
+.quick-view-btn{padding:10px 14px;background:#f5f5f5;border:none;border-radius:12px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:var(--transition);color:#555;font-family:'Inter',sans-serif;}
+.quick-view-btn:hover{background:var(--nude-beige);color:var(--rose-gold);}
+
+/* ===== EDUCATION ===== */
+#education{padding:110px 0;background:linear-gradient(180deg,#fff8f2,#fff);}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;}
+.edu-card{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.07);transition:var(--transition);}
+.edu-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(201,169,110,0.18);}
+.edu-img{height:200px;background:var(--gradient);position:relative;display:flex;align-items:center;justify-content:center;font-size:4rem;}
+.edu-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.3),transparent);}
+.edu-body{padding:24px;}
+.edu-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.edu-badge{background:rgba(201,169,110,0.15);color:var(--rose-gold);padding:4px 12px;border-radius:50px;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+.edu-time{font-size:0.78rem;color:#999;display:flex;align-items:center;gap:4px;}
+.edu-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--dark);line-height:1.35;}
+.edu-card p{font-size:0.88rem;color:#666;line-height:1.7;margin-bottom:16px;}
+.edu-link{font-size:0.85rem;font-weight:600;color:var(--rose-gold);transition:var(--transition);display:inline-flex;align-items:center;gap:6px;}
+.edu-link:hover{color:var(--luxury-gold);gap:10px;}
+
+/* ===== BEFORE & AFTER ===== */
+#before-after{padding:110px 0;background:#fff;}
+.ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;}
+.ba-card{border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.09);transition:var(--transition);}
+.ba-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(201,169,110,0.18);}
+.ba-visual{height:240px;position:relative;cursor:pointer;overflow:hidden;}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;letter-spacing:2px;color:#fff;transition:clip-path 0.5s ease;}
+.ba-before{background:linear-gradient(135deg,#bbb,#ddd);clip-path:inset(0 50% 0 0);}
+.ba-after{background:var(--gradient);clip-path:inset(0 0 0 50%);}
+.ba-card:hover .ba-before{clip-path:inset(0 100% 0 0);}
+.ba-card:hover .ba-after{clip-path:inset(0 0 0 0%);}
+.ba-label{position:absolute;top:12px;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.35);padding:4px 10px;border-radius:6px;z-index:2;}
+.ba-label.left{left:12px;}
+.ba-label.right{right:12px;}
+.ba-info{padding:20px 22px;background:#fff;}
+.ba-info h3{font-size:1.05rem;margin-bottom:8px;color:var(--dark);}
+.ba-info p{font-size:0.85rem;color:#777;font-style:italic;line-height:1.6;}
+
+/* ===== TESTIMONIALS ===== */
+#testimonials{padding:110px 0;background:linear-gradient(180deg,#fff8f2,#fff);}
+.testimonials-wrapper{position:relative;overflow:hidden;}
+.testimonials-track{display:flex;gap:24px;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
+.testimonial-card{min-width:calc(33.333% - 16px);background:#fff;border-radius:20px;padding:32px 28px;box-shadow:0 4px 24px rgba(0,0,0,0.08);flex-shrink:0;transition:var(--transition);}
+.testimonial-card:hover{box-shadow:0 8px 32px rgba(201,169,110,0.18);}
+.test-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.test-avatar{width:52px;height:52px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#fff;flex-shrink:0;}
+.test-name{font-weight:600;font-size:0.97rem;color:var(--dark);}
+.test-date{font-size:0.77rem;color:#aaa;}
+.test-stars{color:var(--luxury-gold);font-size:0.9rem;margin-bottom:12px;}
+.test-text{font-size:0.88rem;color:#555;line-height:1.75;font-style:italic;}
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;}
+.carousel-btn{width:44px;height:44px;border-radius:50%;background:var(--gradient);border:none;color:#fff;font-size:1.1rem;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;}
+.carousel-btn:hover{transform:scale(1.1);box-shadow:0 4px 16px rgba(201,169,110,0.4);}
+.carousel-dots{display:flex;gap:8px;}
+.dot{width:8px;height:8px;border-radius:50%;background:#ddd;cursor:pointer;transition:var(--transition);}
+.dot.active{background:var(--rose-gold);width:24px;border-radius:4px;}
+
+/* ===== AMBASSADOR ===== */
+#ambassador{padding:110px 0;background:var(--gradient);}
+#ambassador .section-title h2{color:#fff;}
+#ambassador .section-title h2 span{-webkit-text-fill-color:#fff;background:none;color:#fff;}
+#ambassador .section-title p{color:rgba(255,255,255,0.8);}
+.amb-benefits{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;margin-bottom:60px;}
+.amb-card{background:rgba(255,255,255,0.18);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:30px 22px;text-align:center;transition:var(--transition);}
+.amb-card:hover{background:rgba(255,255,255,0.28);transform:translateY(-6px);}
+.amb-icon{font-size:2.4rem;margin-bottom:14px;display:block;}
+.amb-card h3{color:#fff;font-size:1.05rem;margin-bottom:8px;}
+.amb-card p{color:rgba(255,255,255,0.8);font-size:0.85rem;line-height:1.6;}
+.amb-form-wrap{background:rgba(255,255,255,0.95);border-radius:24px;padding:48px;max-width:680px;margin:0 auto;}
+.amb-form-wrap h3{font-family:'Playfair Display',serif;font-size:1.6rem;text-align:center;margin-bottom:28px;color:var(--dark);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:0.85rem;font-weight:600;color:var(--dark2);margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 16px;border:1.5px solid #e0e0e0;border-radius:12px;font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--dark);transition:var(--transition);background:#fff;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--rose-gold);box-shadow:0 0 0 3px rgba(201,169,110,0.12);}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-submit{text-align:center;margin-top:8px;}
+.success-msg{display:none;text-align:center;padding:14px 24px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);border-radius:12px;color:var(--rose-gold);font-weight:600;margin-top:14px;}
+.success-msg.show{display:block;}
+
+/* ===== BOOKING ===== */
+#booking{padding:110px 0;background:#fff;}
+.booking-form{background:var(--nude-beige);border-radius:28px;padding:52px;max-width:800px;margin:0 auto;}
+.booking-form h3{font-family:'Playfair Display',serif;font-size:1.6rem;text-align:center;margin-bottom:34px;color:var(--dark);}
+.time-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-top:8px;}
+.time-slot{padding:10px 8px;background:#fff;border:1.5px solid #e0e0e0;border-radius:10px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:var(--transition);text-align:center;font-family:'Inter',sans-serif;color:#555;}
+.time-slot:hover,.time-slot.selected{background:var(--gradient);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(201,169,110,0.3);}
+.toggle-wrap{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.toggle{position:relative;width:48px;height:26px;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:#ddd;border-radius:50px;cursor:pointer;transition:var(--transition);}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:var(--transition);}
+.toggle input:checked+.toggle-slider{background:var(--gradient);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(22px);}
+.toggle-label{font-size:0.88rem;font-weight:500;color:var(--dark2);}
+
+/* ===== CONTACT ===== */
+#contact{padding:110px 0;background:linear-gradient(180deg,#fff8f2,#fff);}
+.contact-methods{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;margin-bottom:56px;}
+.contact-card{background:#fff;border-radius:20px;padding:30px 24px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.07);transition:var(--transition);}
+.contact-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.contact-icon{font-size:2.2rem;margin-bottom:14px;display:block;}
+.contact-card h3{font-size:1rem;margin-bottom:6px;color:var(--dark);}
+.contact-card a{font-size:0.9rem;color:var(--rose-gold);font-weight:500;}
+.social-row{display:flex;justify-content:center;gap:16px;margin-bottom:56px;flex-wrap:wrap;}
+.social-icon{width:48px;height:48px;background:var(--gradient);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;transition:var(--transition);cursor:pointer;}
+.social-icon:hover{transform:translateY(-4px) scale(1.1);box-shadow:0 8px 20px rgba(201,169,110,0.4);}
+.contact-form-wrap{max-width:620px;margin:0 auto;background:#fff;border-radius:24px;padding:44px;box-shadow:0 4px 32px rgba(0,0,0,0.07);}
+.contact-form-wrap h3{font-family:'Playfair Display',serif;font-size:1.5rem;text-align:center;margin-bottom:28px;color:var(--dark);}
+
+/* ===== FOOTER ===== */
+#footer{background:var(--dark);padding:70px 0 0;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:40px;margin-bottom:56px;}
+.footer-brand .logo{font-size:1.5rem;}
+.footer-brand p{color:#aaa;font-size:0.88rem;line-height:1.7;margin-top:14px;}
+.footer-col h4{color:#fff;font-size:1rem;margin-bottom:18px;font-family:'Playfair Display',serif;}
+.footer-col ul{display:flex;flex-direction:column;gap:10px;}
+.footer-col ul li a{color:#aaa;font-size:0.88rem;transition:var(--transition);}
+.footer-col ul li a:hover{color:var(--rose-gold-light);}
+.footer-social{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
+.footer-social a{font-size:1.3rem;transition:var(--transition);}
+.footer-social a:hover{transform:scale(1.2);}
+.newsletter{border-top:1px solid rgba(255,255,255,0.1);padding:40px 0;}
+.newsletter-inner{display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:space-between;}
+.newsletter-text h4{color:#fff;font-size:1.15rem;margin-bottom:6px;font-family:'Playfair Display',serif;}
+.newsletter-text p{color:#aaa;font-size:0.88rem;}
+.newsletter-form{display:flex;gap:0;border-radius:50px;overflow:hidden;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);}
+.newsletter-form input{background:transparent;border:none;padding:14px 22px;color:#fff;font-family:'Inter',sans-serif;font-size:0.88rem;outline:none;min-width:260px;}
+.newsletter-form input::placeholder{color:#888;}
+.newsletter-form button{padding:14px 28px;background:var(--gradient);border:none;color:#fff;font-weight:600;font-size:0.88rem;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif;}
+.newsletter-form button:hover{opacity:0.88;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding:22px 0;text-align:center;}
+.footer-bottom p{color:#666;font-size:0.82rem;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .testimonial-card{min-width:calc(100% - 0px);}
+  .booking-form{padding:32px 22px;}
+  .amb-form-wrap{padding:32px 22px;}
+  .contact-form-wrap{padding:32px 22px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .newsletter-inner{flex-direction:column;align-items:flex-start;}
+  .newsletter-form{width:100%;}
+  .newsletter-form input{min-width:0;flex:1;}
+  .hero-btns{flex-direction:column;align-items:center;}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr;}
+}
+
+/* ===== RTL SUPPORT ===== */
+[dir="rtl"] .nav-links{flex-direction:row-reverse;}
+[dir="rtl"] .about-grid{direction:rtl;}
+[dir="rtl"] .ba-label.left{left:auto;right:12px;}
+[dir="rtl"] .ba-label.right{right:auto;left:12px;}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">C Beauty</a>
+    <ul class="nav-links">
+      <li><a href="#hero" data-en="Home" data-ar="الرئيسية">Home</a></li>
+      <li><a href="#about" data-en="About" data-ar="عنا">About</a></li>
+      <li><a href="#services" data-en="Services" data-ar="خدماتنا">Services</a></li>
+      <li><a href="#products" data-en="Products" data-ar="المنتجات">Products</a></li>
+      <li><a href="#education" data-en="Education" data-ar="التعليم">Education</a></li>
+      <li><a href="#booking" data-en="Booking" data-ar="الحجز">Booking</a></li>
+      <li><a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" aria-label="Cart">🛒<span class="cart-badge" id="cart-badge">0</span></button>
+      <button class="lang-btn" id="lang-btn">العربية</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#products" onclick="closeMobile()">Products</a>
+  <a href="#education" onclick="closeMobile()">Education</a>
+  <a href="#booking" onclick="closeMobile()">Booking</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge" data-en="Premium Beauty Brand" data-ar="علامة تجارية متميزة للجمال">Premium Beauty Brand</div>
+    <h1 data-en="Reveal Your <span>Natural Beauty</span> with C Beauty" data-ar="اكتشفي <span>جمالك الطبيعي</span> مع C Beauty">Reveal Your <span>Natural Beauty</span> with C Beauty</h1>
+    <p data-en="Premium skincare solutions tailored for your unique beauty journey" data-ar="حلول عناية فائقة بالبشرة مصممة لرحلتك الجمالية الفريدة">Premium skincare solutions tailored for your unique beauty journey</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn btn-primary">✨ Book Consultation</a>
+      <a href="#products" class="btn btn-outline">🛍️ Shop Products</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <div class="tag">Our Story</div>
+        <h2>Where <span>Beauty</span> Meets Science</h2>
+        <p>C Beauty was founded with a singular vision: to make premium, science-backed skincare accessible to everyone. We believe that every person deserves to feel confident and radiant in their own skin.</p>
+        <p>Our team of certified dermatologists and beauty experts craft personalized skincare journeys, combining the latest skin science with the finest natural ingredients sourced from around the world.</p>
+        <p>From targeted treatments to holistic beauty consultations, C Beauty is your trusted partner on the path to luminous, healthy skin.</p>
+        <a href="#services" class="btn btn-primary">Explore Our Services</a>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-target="10000">0</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-target="500">0</div>
+          <div class="stat-label">Premium Products</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-target="8000">0</div>
+          <div class="stat-label">Consultations Done</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-target="98">0</div>
+          <div class="stat-label">% Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Our <span>Premium</span> Services</h2>
+      <p>Comprehensive beauty and skincare solutions tailored to your unique needs</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <span class="service-icon">🔬</span>
+        <h3>Skin Analysis</h3>
+        <p>Advanced diagnostic tools to understand your unique skin type, concerns, and optimal routine.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">✨</span>
+        <h3>Facial Treatments</h3>
+        <p>Luxurious facial therapies designed to hydrate, rejuvenate, and restore your natural glow.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💊</span>
+        <h3>Acne Treatment</h3>
+        <p>Targeted solutions to combat acne and prevent breakouts for clear, smooth skin.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🌟</span>
+        <h3>Pigmentation Treatment</h3>
+        <p>Specialized protocols to reduce dark spots, hyperpigmentation, and uneven skin tone.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">⏳</span>
+        <h3>Anti-Aging Programs</h3>
+        <p>Comprehensive programs to minimize fine lines, wrinkles, and restore youthful elasticity.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💫</span>
+        <h3>Skin Brightening</h3>
+        <p>Illuminating treatments to achieve a radiant, luminous complexion full of life and vitality.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💄</span>
+        <h3>Beauty Consultations</h3>
+        <p>One-on-one expert sessions to craft your ideal beauty regimen and product selection.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💇</span>
+        <h3>Hair Care</h3>
+        <p>Premium hair health treatments and scalp therapies for lustrous, strong, vibrant hair.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">📋</span>
+        <h3>Personalized Plans</h3>
+        <p>Custom skincare plans built around your lifestyle, goals, budget, and skin conditions.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💻</span>
+        <h3>Online Consultation</h3>
+        <p>Expert skincare advice from the comfort of home via video call with our certified specialists.</p>
+        <button class="learn-more">Learn More →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Shop Our <span>Collection</span></h2>
+      <p>Curated premium beauty products formulated with the finest ingredients</p>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="cleansers">Cleansers</button>
+      <button class="filter-tab" data-filter="moisturizers">Moisturizers</button>
+      <button class="filter-tab" data-filter="sunscreens">Sunscreens</button>
+      <button class="filter-tab" data-filter="serums">Serums</button>
+      <button class="filter-tab" data-filter="acne">Acne</button>
+      <button class="filter-tab" data-filter="whitening">Whitening</button>
+      <button class="filter-tab" data-filter="haircare">Hair Care</button>
+      <button class="filter-tab" data-filter="bodycare">Body Care</button>
+    </div>
+    <div class="products-grid" id="products-grid">
+      <div class="product-card" data-category="cleansers">
+        <div class="product-img">
+          <span class="product-img-icon">🧴</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Cleansers</div>
+          <div class="product-name">Gentle Foam Cleanser</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(124)</span></div>
+          <div class="product-price">SAR 89 <span>/ 150ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="moisturizers">
+        <div class="product-img" style="background:linear-gradient(135deg,#e8c4e0,#f5d6f0);">
+          <span class="product-img-icon">💧</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Moisturizers</div>
+          <div class="product-name">Rose Gold Hydra Cream</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(98)</span></div>
+          <div class="product-price">SAR 149 <span>/ 50ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="sunscreens">
+        <div class="product-img" style="background:linear-gradient(135deg,#ffe0a3,#ffd580);">
+          <span class="product-img-icon">☀️</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Sunscreens</div>
+          <div class="product-name">SPF 50+ Daily Shield</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(203)</span></div>
+          <div class="product-price">SAR 119 <span>/ 80ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="serums">
+        <div class="product-img" style="background:linear-gradient(135deg,#c8e6c9,#a5d6a7);">
+          <span class="product-img-icon">💎</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Serums</div>
+          <div class="product-name">Vitamin C Glow Serum</div>
+          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(87)</span></div>
+          <div class="product-price">SAR 199 <span>/ 30ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="acne">
+        <div class="product-img" style="background:linear-gradient(135deg,#bbdefb,#90caf9);">
+          <span class="product-img-icon">🎯</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Acne</div>
+          <div class="product-name">Clear Skin BHA Toner</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(156)</span></div>
+          <div class="product-price">SAR 109 <span>/ 200ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="whitening">
+        <div class="product-img" style="background:linear-gradient(135deg,#fff9c4,#fff59d);">
+          <span class="product-img-icon">🌙</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Whitening</div>
+          <div class="product-name">Bright Night Cream</div>
+          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(72)</span></div>
+          <div class="product-price">SAR 179 <span>/ 50ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="haircare">
+        <div class="product-img" style="background:linear-gradient(135deg,#f8bbd0,#f48fb1);">
+          <span class="product-img-icon">💇</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Hair Care</div>
+          <div class="product-name">Argan Silk Hair Oil</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(134)</span></div>
+          <div class="product-price">SAR 139 <span>/ 100ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="bodycare">
+        <div class="product-img" style="background:linear-gradient(135deg,#d7ccc8,#bcaaa4);">
+          <span class="product-img-icon">🧖</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Body Care</div>
+          <div class="product-name">Luxury Body Butter</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(89)</span></div>
+          <div class="product-price">SAR 99 <span>/ 200ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-category="serums">
+        <div class="product-img" style="background:linear-gradient(135deg,#b2dfdb,#80cbc4);">
+          <span class="product-img-icon">✨</span>
+          <button class="wishlist-btn" aria-label="Wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Serums</div>
+          <div class="product-name">Retinol Renewal Serum</div>
+          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(211)</span></div>
+          <div class="product-price">SAR 229 <span>/ 30ml</span></div>
+          <div class="product-actions">
+            <button class="add-cart-btn">Add to Cart</button>
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Skincare <span>Education Hub</span></h2>
+      <p>Expert knowledge to empower your beauty journey with science-backed insights</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div class="edu-img">🌿</div>
+        <div class="edu-body">
+          <div class="edu-meta">
+            <span class="edu-badge">Skincare Basics</span>
+            <span class="edu-time">⏱ 8 min read</span>
+          </div>
+          <h3>Complete Skincare Routine Guide for Every Skin Type</h3>
+          <p>Master the perfect morning and evening skincare routine with our dermatologist-approved step-by-step guide tailored to your unique skin type and concerns.</p>
+          <a href="#" class="edu-link">Read Article →</a>
+        </div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-img" style="background:linear-gradient(135deg,#ffe082,#ffb300);">☀️</div>
+        <div class="edu-body">
+          <div class="edu-meta">
+            <span class="edu-badge">Sun Protection</span>
+            <span class="edu-time">⏱ 6 min read</span>
+          </div>
+          <h3>Sun Protection: Why SPF Matters Every Single Day</h3>
+          <p>Discover the science behind UV damage, how to choose the right SPF, and why daily sun protection is the single most effective anti-aging step you can take.</p>
+          <a href="#" class="edu-link">Read Article →</a>
+        </div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-img" style="background:linear-gradient(135deg,#ce93d8,#ab47bc);">💊</div>
+        <div class="edu-body">
+          <div class="edu-meta">
+            <span class="edu-badge">Acne Care</span>
+            <span class="edu-time">⏱ 10 min read</span>
+          </div>
+          <h3>Acne Prevention & Treatment: A Comprehensive Guide</h3>
+          <p>From understanding the root causes of acne to building an effective treatment plan, our experts break down everything you need to know to achieve clear skin.</p>
+          <a href="#" class="edu-link">Read Article →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BEFORE & AFTER ===== -->
+<section id="before-after">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Real <span>Transformations</span></h2>
+      <p>Hover over the cards to see the incredible results our clients have achieved</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card fade-up">
+        <div class="ba-visual">
+          <div class="ba-before">BEFORE<span class="ba-label left">Before</span></div>
+          <div class="ba-after">AFTER ✨<span class="ba-label right">After</span></div>
+        </div>
+        <div class="ba-info">
+          <h3>Acne Treatment – 8 Weeks</h3>
+          <p>"My skin has completely transformed. I feel confident going out without makeup for the first time in years!" – Sarah M.</p>
+        </div>
+      </div>
+      <div class="ba-card fade-up">
+        <div class="ba-visual">
+          <div class="ba-before">BEFORE<span class="ba-label left">Before</span></div>
+          <div class="ba-after">AFTER ✨<span class="ba-label right">After</span></div>
+        </div>
+        <div class="ba-info">
+          <h3>Pigmentation Treatment – 12 Weeks</h3>
+          <p>"The dark spots that bothered me for years are completely gone. The C Beauty team is truly amazing!" – Noura A.</p>
+        </div>
+      </div>
+      <div class="ba-card fade-up">
+        <div class="ba-visual">
+          <div class="ba-before">BEFORE<span class="ba-label left">Before</span></div>
+          <div class="ba-after">AFTER ✨<span class="ba-label right">After</span></div>
+        </div>
+        <div class="ba-info">
+          <h3>Anti-Aging Program – 16 Weeks</h3>
+          <p>"People keep asking if I've had work done. I just tell them: C Beauty! My skin looks 10 years younger." – Fatima H.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>What Our <span>Clients Say</span></h2>
+      <p>Real stories from real people who transformed their skin with C Beauty</p>
+    </div>
+    <div class="testimonials-wrapper fade-up">
+      <div class="testimonials-track" id="testimonials-track">
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar">SM</div>
+            <div><div class="test-name">Sarah Mohammed</div><div class="test-date">January 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"C Beauty completely changed my skin. After just 6 weeks following their personalized plan, my acne cleared up and my confidence soared. The team is knowledgeable, caring, and truly passionate about results."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#ce93d8,#ab47bc);">NA</div>
+            <div><div class="test-name">Noura Al-Rashidi</div><div class="test-date">February 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"The skin analysis was eye-opening. I had been using the wrong products for years! With C Beauty's guidance, my hyperpigmentation has faded significantly and my skin glows like never before."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#80cbc4,#26a69a);">FH</div>
+            <div><div class="test-name">Fatima Hassan</div><div class="test-date">March 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"The online consultation service is incredibly convenient. My specialist remembers every detail about my skin and the products she recommended have been life-changing. Worth every riyal!"</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#ffcc80,#ffa726);">LA</div>
+            <div><div class="test-name">Lina Abdullah</div><div class="test-date">April 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"I was skeptical at first, but C Beauty delivered beyond my expectations. My dry skin is now plump and hydrated, and I've received so many compliments. The Rose Gold Hydra Cream is my holy grail!"</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#a5d6a7,#4caf50);">RK</div>
+            <div><div class="test-name">Reem Khalil</div><div class="test-date">May 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"The ambassador program is fantastic. Not only do I get to share products I genuinely love, but the community and support from the C Beauty team are second to none. Proud to represent this brand!"</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-header">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#f48fb1,#e91e63);">MA</div>
+            <div><div class="test-name">Maha Al-Otaibi</div><div class="test-date">June 2024</div></div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Booked my first facial treatment and I was blown away by the experience. The ambiance, the care, the results – all exceptional. My skin looked radiant for weeks afterward. Already booked my next appointment!"</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev-btn">‹</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="next-btn">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AMBASSADOR ===== -->
+<section id="ambassador">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Join Our <span style="-webkit-text-fill-color:#fff;color:#fff;">Ambassador Program</span></h2>
+      <p>Grow with us, earn rewards, and inspire others on their beauty journey</p>
+    </div>
+    <div class="amb-benefits fade-up">
+      <div class="amb-card">
+        <span class="amb-icon">💰</span>
+        <h3>Earn Commissions</h3>
+        <p>Earn competitive commissions on every sale you drive through your unique ambassador link.</p>
+      </div>
+      <div class="amb-card">
+        <span class="amb-icon">🎁</span>
+        <h3>Exclusive Products</h3>
+        <p>Be the first to receive new launches and limited-edition products before anyone else.</p>
+      </div>
+      <div class="amb-card">
+        <span class="amb-icon">👥</span>
+        <h3>Community Access</h3>
+        <p>Join an exclusive community of beauty influencers and receive expert training and support.</p>
+      </div>
+      <div class="amb-card">
+        <span class="amb-icon">🏆</span>
+        <h3>Performance Bonuses</h3>
+        <p>Hit targets and unlock generous performance bonuses, trips, and luxury rewards.</p>
+      </div>
+    </div>
+    <div class="amb-form-wrap fade-up">
+      <h3>Apply to Become an Ambassador</h3>
+      <form id="amb-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Social Media Handle *</label>
+            <input type="text" placeholder="@yourhandle" required>
+          </div>
+          <div class="form-group">
+            <label>Follower Count *</label>
+            <input type="number" placeholder="e.g. 10000" min="0" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Primary Platform</label>
+          <select>
+            <option>Instagram</option>
+            <option>TikTok</option>
+            <option>Snapchat</option>
+            <option>YouTube</option>
+            <option>Twitter/X</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Why do you want to join?</label>
+          <textarea placeholder="Tell us about yourself and why you'd like to be a C Beauty ambassador..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary">Submit Application ✨</button>
+        </div>
+        <div class="success-msg" id="amb-success">🌟 Thank you! Your application has been received. We'll be in touch within 3–5 business days.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section id="booking">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Book Your <span>Consultation</span></h2>
+      <p>Schedule your personalized beauty session with our expert team</p>
+    </div>
+    <div class="booking-form fade-up">
+      <h3>Reserve Your Appointment</h3>
+      <form id="booking-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="book-name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="book-email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="book-phone" placeholder="+966 50 000 0000" required>
+          </div>
+          <div class="form-group">
+            <label>Select Service *</label>
+            <select id="book-service" required>
+              <option value="">Choose a service...</option>
+              <option>Skin Analysis</option>
+              <option>Facial Treatment</option>
+              <option>Acne Treatment</option>
+              <option>Pigmentation Treatment</option>
+              <option>Anti-Aging Program</option>
+              <option>Skin Brightening</option>
+              <option>Beauty Consultation</option>
+              <option>Hair Care</option>
+              <option>Personalized Skincare Plan</option>
+              <option>Online Consultation</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Preferred Date *</label>
+          <input type="date" id="book-date" required>
+        </div>
+        <div class="form-group">
+          <label>Select Time Slot *</label>
+          <div class="time-slots" id="time-slots">
+            <button type="button" class="time-slot" data-time="09:00">9:00 AM</button>
+            <button type="button" class="time-slot" data-time="10:00">10:00 AM</button>
+            <button type="button" class="time-slot" data-time="11:00">11:00 AM</button>
+            <button type="button" class="time-slot" data-time="12:00">12:00 PM</button>
+            <button type="button" class="time-slot" data-time="13:00">1:00 PM</button>
+            <button type="button" class="time-slot" data-time="14:00">2:00 PM</button>
+            <button type="button" class="time-slot" data-time="15:00">3:00 PM</button>
+            <button type="button" class="time-slot" data-time="16:00">4:00 PM</button>
+            <button type="button" class="time-slot" data-time="17:00">5:00 PM</button>
+            <button type="button" class="time-slot" data-time="18:00">6:00 PM</button>
+          </div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="whatsapp-toggle"><span class="toggle-slider"></span></label>
+          <span class="toggle-label">📱 Send WhatsApp confirmation & reminder</span>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary">Confirm Booking ✨</button>
+        </div>
+        <div class="success-msg" id="booking-success">✅ Booking confirmed! You'll receive a confirmation shortly. We look forward to seeing you!</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Get In <span>Touch</span></h2>
+      <p>We're here to help you on your beauty journey – reach out anytime</p>
+    </div>
+    <div class="contact-methods fade-up">
+      <div class="contact-card">
+        <span class="contact-icon">💬</span>
+        <h3>WhatsApp</h3>
+        <a href="https://wa.me/966500000000" target="_blank">+966 50 000 0000</a>
+        <p style="font-size:0.8rem;color:#aaa;margin-top:6px;">Available Sun–Thu, 9AM–9PM</p>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">📧</span>
+        <h3>Email</h3>
+        <a href="mailto:hello@cbeauty.sa">hello@cbeauty.sa</a>
+        <p style="font-size:0.8rem;color:#aaa;margin-top:6px;">Response within 24 hours</p>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">📞</span>
+        <h3>Phone</h3>
+        <a href="tel:+96611000000">+966 11 000 0000</a>
+        <p style="font-size:0.8rem;color:#aaa;margin-top:6px;">Sun–Thu, 9AM–6PM</p>
+      </div>
+    </div>
+    <div class="social-row fade-up">
+      <div class="social-icon" title="Instagram">📸</div>
+      <div class="social-icon" title="TikTok">🎵</div>
+      <div class="social-icon" title="Snapchat">👻</div>
+      <div class="social-icon" title="Twitter/X">𝕏</div>
+      <div class="social-icon" title="Facebook">👍</div>
+    </div>
+    <div class="contact-form-wrap fade-up">
+      <h3>Send Us a Message</h3>
+      <form id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" placeholder="Full name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="How can we help?">
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea placeholder="Write your message here..." required></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary">Send Message 💌</button>
+        </div>
+        <div class="success-msg" id="contact-success">💌 Thank you for your message! We'll get back to you within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">C Beauty</div>
+        <p>Where Beauty Meets Science. Premium skincare solutions crafted for your unique journey to radiant, confident skin.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#booking">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Skin Analysis</a></li>
+          <li><a href="#services">Facial Treatments</a></li>
+          <li><a href="#services">Acne Treatment</a></li>
+          <li><a href="#services">Anti-Aging</a></li>
+          <li><a href="#services">Skin Brightening</a></li>
+          <li><a href="#services">Online Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" title="Instagram">📸</a>
+          <a href="#" title="TikTok">🎵</a>
+          <a href="#" title="Snapchat">👻</a>
+          <a href="#" title="Twitter/X">𝕏</a>
+          <a href="#" title="Facebook">👍</a>
+        </div>
+        <p style="color:#aaa;font-size:0.85rem;margin-top:14px;">Follow our journey and discover daily beauty tips, tutorials, and exclusive offers.</p>
+      </div>
+    </div>
+    <div class="newsletter">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h4>Stay Beautiful. Stay Updated.</h4>
+          <p>Subscribe for expert tips, exclusive deals, and new product launches.</p>
+        </div>
+        <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Enter your email address" required>
+          <button type="submit">Subscribe ✨</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 C Beauty. All rights reserved. | Crafted with ❤️ for your beauty journey.</p>
+  </div>
+</footer>
+
+<script>
+// ===== NAVBAR SCROLL =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ===== MOBILE MENU =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobile() {
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+    }
+  });
+});
+
+// ===== HERO CANVAS PARTICLES =====
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+function Particle() {
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.radius = Math.random() * 3 + 1;
+  this.speedX = (Math.random() - 0.5) * 0.6;
+  this.speedY = (Math.random() - 0.5) * 0.6;
+  this.opacity = Math.random() * 0.5 + 0.15;
+  const colors = ['#C9A96E','#E8C9A0','#D4AF37','#F5E6D3'];
+  this.color = colors[Math.floor(Math.random() * colors.length)];
+}
+Particle.prototype.update = function() {
+  this.x += this.speedX;
+  this.y += this.speedY;
+  if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+  if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+};
+Particle.prototype.draw = function() {
+  ctx.save();
+  ctx.globalAlpha = this.opacity;
+  ctx.fillStyle = this.color;
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+};
+function initParticles() {
+  particles = [];
+  const count = Math.min(Math.floor(canvas.width * canvas.height / 8000), 120);
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  // Draw lines between close particles
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        ctx.save();
+        ctx.globalAlpha = (1 - dist/100) * 0.12;
+        ctx.strokeStyle = '#C9A96E';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+resizeCanvas();
+initParticles();
+animateParticles();
+
+// ===== INTERSECTION OBSERVER =====
+const fadeEls = document.querySelectorAll('.fade-up');
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Counter animation trigger
+      const counter = entry.target.querySelector('.stat-number[data-target]');
+      if (counter && !counter.dataset.animated) animateCounter(counter);
+    }
+  });
+}, observerOptions);
+fadeEls.forEach(el => observer.observe(el));
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el) {
+  el.dataset.animated = 'true';
+  const target = parseInt(el.dataset.target);
+  const suffix = target >= 98 && target < 100 ? '' : '+';
+  const duration = 2000;
+  const start = performance.now();
+  function update(timestamp) {
+    const elapsed = timestamp - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString() + (progress >= 1 ? (target < 100 ? '%' : suffix) : '');
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = (target === 98 ? '98%' : target.toLocaleString() + suffix);
+  }
+  requestAnimationFrame(update);
+}
+
+// Also observe stat cards individually
+document.querySelectorAll('.stat-card').forEach(card => {
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target.querySelector('.stat-number[data-target]');
+        if (counter && !counter.dataset.animated) animateCounter(counter);
+      }
+    });
+  }, { threshold: 0.5 });
+  statObs.observe(card);
+});
+
+// ===== PRODUCT FILTER =====
+const filterTabs = document.querySelectorAll('.filter-tab');
+const productCards = document.querySelectorAll('.product-card');
+filterTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    filterTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    productCards.forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.classList.remove('hidden');
+        card.style.animation = 'none';
+        void card.offsetWidth;
+        card.style.animation = '';
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// ===== WISHLIST TOGGLE =====
+document.querySelectorAll('.wishlist-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    btn.textContent = btn.classList.contains('active') ? '❤️' : '🤍';
+    btn.style.transform = 'scale(1.3)';
+    setTimeout(() => btn.style.transform = '', 200);
+  });
+});
+
+// ===== ADD TO CART =====
+let cartCount = 0;
+const cartBadge = document.getElementById('cart-badge');
+document.querySelectorAll('.add-cart-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    cartCount++;
+    cartBadge.textContent = cartCount;
+    const original = btn.textContent;
+    btn.textContent = 'Added! ✓';
+    btn.style.background = 'linear-gradient(135deg,#4caf50,#66bb6a)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 1400);
+  });
+});
+
+// ===== TESTIMONIAL CAROUSEL =====
+const track = document.getElementById('testimonials-track');
+const dotsContainer = document.getElementById('carousel-dots');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const cards = track.querySelectorAll('.testimonial-card');
+let currentIndex = 0;
+let autoPlayInterval;
+
+function getVisibleCount() {
+  return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+}
+
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  const totalDots = Math.ceil(cards.length / getVisibleCount());
+  for (let i = 0; i < totalDots; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+}
+
+function goTo(index) {
+  const visibleCount = getVisibleCount();
+  const totalDots = Math.ceil(cards.length / visibleCount);
+  currentIndex = (index + totalDots) % totalDots;
+  const cardWidth = cards[0].offsetWidth + 24;
+  track.style.transform = `translateX(-${currentIndex * cardWidth * visibleCount}px)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+}
+
+prevBtn.addEventListener('click', () => { goTo(currentIndex - 1); resetAuto(); });
+nextBtn.addEventListener('click', () => { goTo(currentIndex + 1); resetAuto(); });
+
+function startAuto() {
+  autoPlayInterval = setInterval(() => goTo(currentIndex + 1), 4000);
+}
+function resetAuto() { clearInterval(autoPlayInterval); startAuto(); }
+
+track.parentElement.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+track.parentElement.addEventListener('mouseleave', startAuto);
+window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+buildDots();
+startAuto();
+
+// ===== TIME SLOT SELECTION =====
+document.querySelectorAll('.time-slot').forEach(slot => {
+  slot.addEventListener('click', () => {
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    slot.classList.add('selected');
+  });
+});
+
+// ===== BOOKING FORM =====
+document.getElementById('booking-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const selectedSlot = document.querySelector('.time-slot.selected');
+  if (!selectedSlot) { alert('Please select a time slot.'); return; }
+  const successMsg = document.getElementById('booking-success');
+  successMsg.classList.add('show');
+  this.reset();
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  setTimeout(() => successMsg.classList.remove('show'), 6000);
+});
+
+// ===== AMBASSADOR FORM =====
+document.getElementById('amb-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const successMsg = document.getElementById('amb-success');
+  successMsg.classList.add('show');
+  this.reset();
+  setTimeout(() => successMsg.classList.remove('show'), 6000);
+});
+
+// ===== CONTACT FORM =====
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const successMsg = document.getElementById('contact-success');
+  successMsg.classList.add('show');
+  this.reset();
+  setTimeout(() => successMsg.classList.remove('show'), 6000);
+});
+
+// ===== NEWSLETTER =====
+function handleNewsletter(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const original = btn.textContent;
+  btn.textContent = 'Subscribed! ✓';
+  btn.style.background = '#4caf50';
+  e.target.reset();
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.style.background = '';
+  }, 3000);
+}
+
+// ===== LANGUAGE TOGGLE =====
+const langBtn = document.getElementById('lang-btn');
+let isArabic = false;
+const translations = {
+  en: {
+    hero_badge: 'Premium Beauty Brand',
+    hero_h1: 'Reveal Your <span>Natural Beauty</span> with C Beauty',
+    hero_p: 'Premium skincare solutions tailored for your unique beauty journey',
+    about_tag: 'Our Story',
+    about_h2: 'Where <span>Beauty</span> Meets Science',
+    services_h2: 'Our <span>Premium</span> Services',
+    products_h2: 'Shop Our <span>Collection</span>',
+    edu_h2: 'Skincare <span>Education Hub</span>',
+    ba_h2: 'Real <span>Transformations</span>',
+    test_h2: 'What Our <span>Clients Say</span>',
+    amb_h2: 'Join Our <span>Ambassador Program</span>',
+    book_h2: 'Book Your <span>Consultation</span>',
+    contact_h2: 'Get In <span>Touch</span>',
+    lang_btn: 'العربية'
+  },
+  ar: {
+    hero_badge: 'علامة تجارية متميزة للجمال',
+    hero_h1: 'اكتشفي <span>جمالك الطبيعي</span> مع C Beauty',
+    hero_p: 'حلول عناية فائقة بالبشرة مصممة لرحلتك الجمالية الفريدة',
+    about_tag: 'قصتنا',
+    about_h2: 'حيث يلتقي <span>الجمال</span> بالعلم',
+    services_h2: 'خدماتنا <span>المتميزة</span>',
+    products_h2: 'تسوقي <span>مجموعتنا</span>',
+    edu_h2: 'مركز <span>التثقيف بالعناية بالبشرة</span>',
+    ba_h2: '<span>تحولات</span> حقيقية',
+    test_h2: 'ماذا يقول <span>عملاؤنا</span>',
+    amb_h2: 'انضمي إلى <span>برنامج السفراء</span>',
+    book_h2: 'احجزي <span>استشارتك</span>',
+    contact_h2: 'تواصلي <span>معنا</span>',
+    lang_btn: 'English'
+  }
+};
+
+langBtn.addEventListener('click', () => {
+  isArabic = !isArabic;
+  const lang = isArabic ? 'ar' : 'en';
+  const t = translations[lang];
+  document.documentElement.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', isArabic ? 'ar' : 'en');
+  langBtn.textContent = t.lang_btn;
+
+  // Update nav links
+  document.querySelectorAll('.nav-links a[data-en]').forEach(a => {
+    a.textContent = isArabic ? a.dataset.ar : a.dataset.en;
+  });
+
+  // Update sections text
+  const updates = [
+    ['.hero-badge', t.hero_badge],
+    ['#hero h1', t.hero_h1],
+    ['#hero > .hero-content > p', t.hero_p],
+    ['.about-text .tag', t.about_tag],
+  ];
+  updates.forEach(([sel, html]) => {
+    const el = document.querySelector(sel);
+    if (el) el.innerHTML = html;
+  });
+
+  // Section titles
+  const sectionTitles = document.querySelectorAll('.section-title h2');
+  const titleKeys = ['services_h2','products_h2','edu_h2','ba_h2','test_h2','amb_h2','book_h2','contact_h2'];
+  sectionTitles.forEach((el, i) => {
+    if (titleKeys[i]) el.innerHTML = t[titleKeys[i]];
+  });
+
+  // About heading
+  const aboutH2 = document.querySelector('.about-text h2');
+  if (aboutH2) aboutH2.innerHTML = t.about_h2;
+});
+
+// ===== SET MIN DATE FOR BOOKING =====
+const dateInput = document.getElementById('book-date');
+if (dateInput) {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2,'0');
+  const mm = String(today.getMonth()+1).padStart(2,'0');
+  dateInput.min = `${today.getFullYear()}-${mm}-${dd}`;
+}
+</script>
+</body>
+</html>
