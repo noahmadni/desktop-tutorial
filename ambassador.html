@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>برنامج السفراء — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-amb-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .cb-amb-benefit {
+      background: var(--white); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center;
+      box-shadow: var(--shadow); transition: var(--transition); border-bottom: 4px solid var(--gold);
+    }
+    .cb-amb-benefit:hover { transform: translateY(-8px); }
+    .cb-amb-benefit .icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+    .cb-amb-benefit h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .cb-amb-benefit p { font-size: 0.88rem; color: var(--text-gray); line-height: 1.6; }
+
+    .cb-how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
+    .cb-how-steps::before { content: ''; position: absolute; top: 50px; right: 16%; left: 16%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+    .cb-how-step { text-align: center; position: relative; }
+    .cb-step-circle {
+      width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; box-shadow: 0 10px 30px rgba(139,26,74,0.3);
+      position: relative; z-index: 1;
+    }
+    .cb-step-num { position: absolute; top: -8px; right: -8px; width: 28px; height: 28px; border-radius: 50%; background: var(--gold); color: var(--white); font-size: 0.85rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .cb-how-step h4 { font-size: 1.05rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .cb-how-step p { color: var(--text-gray); font-size: 0.9rem; line-height: 1.7; }
+
+    .cb-amb-section { background: #f9f0f5; }
+
+    .cb-req-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cb-req-item { display: flex; align-items: center; gap: 12px; padding: 1rem 1.5rem; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(139,26,74,0.06); }
+    .cb-req-icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .cb-req-item span { font-size: 0.92rem; font-weight: 600; color: var(--text-dark); }
+
+    .cb-form-card { background: var(--white); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .cb-ambassadors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .cb-ambassador-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); text-align: center; transition: var(--transition); }
+    .cb-ambassador-card:hover { transform: translateY(-8px); }
+    .cb-ambassador-photo { height: 180px; background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light)); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .cb-ambassador-body { padding: 1.5rem; }
+    .cb-ambassador-body h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.3rem; }
+    .cb-ambassador-body .handle { color: var(--gold-dark); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .cb-ambassador-body p { font-size: 0.85rem; color: var(--text-gray); }
+
+    @media (max-width: 900px) {
+      .cb-amb-benefits { grid-template-columns: 1fr 1fr; }
+      .cb-how-steps { grid-template-columns: 1fr; }
+      .cb-how-steps::before { display: none; }
+      .cb-req-list { grid-template-columns: 1fr; }
+      .cb-ambassadors-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cb-amb-benefits { grid-template-columns: 1fr; }
+      .cb-ambassadors-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>برنامج سفيرات C Beauty 👑</h1>
+      <p>كوني سفيرة للجمال واكسبي معنا بكل ثقة وإلهام</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>برنامج السفراء</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">مميزات البرنامج</span>
+        <h2>لماذا تنضمين لعائلة سفيرات C Beauty؟</h2>
+        <p>برنامج سفيراتنا يمنحكِ فرصة حقيقية للكسب والنمو مع بناء مجتمع جمال إيجابي</p>
+      </div>
+      <div class="cb-amb-benefits">
+        <div class="cb-amb-benefit cb-fade-in">
+          <span class="icon">💰</span>
+          <h4>عمولة مجزية</h4>
+          <p>اكسبي عمولة تصل إلى 20% على كل مبيعة تأتي عبركِ.</p>
+        </div>
+        <div class="cb-amb-benefit cb-fade-in">
+          <span class="icon">🎁</span>
+          <h4>منتجات مجانية</h4>
+          <p>احصلي على منتجات C Beauty المميزة مجاناً لتجربتها ومشاركتها.</p>
+        </div>
+        <div class="cb-amb-benefit cb-fade-in">
+          <span class="icon">📚</span>
+          <h4>تدريب احترافي</h4>
+          <p>دورات وتدريبات مجانية في مجال العناية بالبشرة والتسويق الرقمي.</p>
+        </div>
+        <div class="cb-amb-benefit cb-fade-in">
+          <span class="icon">🌟</span>
+          <h4>فعاليات حصرية</h4>
+          <p>دعوات لإطلاق المنتجات والفعاليات الحصرية في السودان والخليج.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="cb-section cb-amb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">كيف يعمل البرنامج؟</span>
+        <h2>ثلاث خطوات بسيطة للبدء</h2>
+      </div>
+      <div class="cb-how-steps">
+        <div class="cb-how-step cb-fade-in">
+          <div class="cb-step-circle">📝<span class="cb-step-num">1</span></div>
+          <h4>قدّمي طلبكِ</h4>
+          <p>املئي نموذج التقديم بالأسفل وأخبرينا عن نفسكِ وشغفكِ بالجمال.</p>
+        </div>
+        <div class="cb-how-step cb-fade-in">
+          <div class="cb-step-circle">✅<span class="cb-step-num">2</span></div>
+          <h4>المراجعة والقبول</h4>
+          <p>يراجع فريقنا طلبكِ ويتواصل معكِ خلال 3-5 أيام عمل لإبلاغكِ بالنتيجة.</p>
+        </div>
+        <div class="cb-how-step cb-fade-in">
+          <div class="cb-step-circle">🚀<span class="cb-step-num">3</span></div>
+          <h4>ابدئي رحلتكِ</h4>
+          <p>احصلي على كود الخصم الخاص بكِ، المنتجات المجانية، وابدئي الكسب!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">المتطلبات</span>
+        <h2>من يمكنها التقديم؟</h2>
+      </div>
+      <div class="cb-req-list">
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">👩</div><span>أي امرأة عمرها 18 سنة فأكثر</span></div>
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">📱</div><span>حساب نشط على وسائل التواصل الاجتماعي</span></div>
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">❤️</div><span>شغف حقيقي بالجمال والعناية بالبشرة</span></div>
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">💬</div><span>قدرة على التواصل بصدق مع المتابعين</span></div>
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">🌍</div><span>مقيمة في السودان أو دول الخليج</span></div>
+        <div class="cb-req-item cb-fade-in"><div class="cb-req-icon">✅</div><span>الاستعداد للالتزام بمعايير العلامة التجارية</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT AMBASSADORS -->
+  <section class="cb-section" style="background:#f9f0f5;">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">سفيراتنا</span>
+        <h2>تعرّفي على سفيرات C Beauty</h2>
+      </div>
+      <div class="cb-ambassadors-grid">
+        <div class="cb-ambassador-card cb-fade-in">
+          <div class="cb-ambassador-photo">👸</div>
+          <div class="cb-ambassador-body">
+            <h4>نور الهدى</h4>
+            <div class="handle">@nooralhuda.beauty</div>
+            <p>سفيرة C Beauty في الخرطوم. متخصصة في ترطيب وإشراق البشرة.</p>
+          </div>
+        </div>
+        <div class="cb-ambassador-card cb-fade-in">
+          <div class="cb-ambassador-photo">💄</div>
+          <div class="cb-ambassador-body">
+            <h4>لينا المهدي</h4>
+            <div class="handle">@lina.skincare</div>
+            <p>سفيرة C Beauty في دبي. خبيرة في علاجات مكافحة الشيخوخة.</p>
+          </div>
+        </div>
+        <div class="cb-ambassador-card cb-fade-in">
+          <div class="cb-ambassador-photo">🌟</div>
+          <div class="cb-ambassador-body">
+            <h4>سلمى عبدالله</h4>
+            <div class="handle">@salma.glow</div>
+            <p>سفيرة C Beauty في جدة. ناشطة في مجال البشرة الطبيعية والمكونات العضوية.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="cb-section">
+    <div class="cb-container" style="max-width:700px;">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">التقديم</span>
+        <h2>قدّمي طلبكِ الآن 📝</h2>
+        <p>خطوة واحدة تفصلكِ عن الانضمام لعائلة سفيرات C Beauty</p>
+      </div>
+      <div class="cb-form-card cb-fade-in">
+        <form onsubmit="submitAmb(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div class="cb-form-group">
+              <label>الاسم الكامل *</label>
+              <input type="text" required placeholder="اسمكِ الكريم" />
+            </div>
+            <div class="cb-form-group">
+              <label>رقم الهاتف / واتساب *</label>
+              <input type="tel" required placeholder="+249 ..." />
+            </div>
+          </div>
+          <div class="cb-form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" placeholder="example@email.com" />
+          </div>
+          <div class="cb-form-group">
+            <label>حساب انستغرام *</label>
+            <input type="text" required placeholder="@username" />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div class="cb-form-group">
+              <label>المدينة / الدولة *</label>
+              <input type="text" required placeholder="الخرطوم، دبي، جدة..." />
+            </div>
+            <div class="cb-form-group">
+              <label>عدد المتابعين التقريبي</label>
+              <select>
+                <option>أقل من 1,000</option>
+                <option>1,000 – 5,000</option>
+                <option>5,000 – 20,000</option>
+                <option>+20,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="cb-form-group">
+            <label>لماذا تريدين أن تكوني سفيرة C Beauty؟ *</label>
+            <textarea required placeholder="أخبرينا عن شغفكِ بالجمال وكيف يمكنكِ تمثيل C Beauty..."></textarea>
+          </div>
+          <button type="submit" class="cb-btn cb-btn-gold" style="width:100%;justify-content:center;font-size:1.05rem;">قدّمي طلبكِ الآن 👑</button>
+        </form>
+        <div id="ambSuccess" style="display:none;text-align:center;padding:2rem;">
+          <div style="font-size:4rem;margin-bottom:1rem;">🎉</div>
+          <h3 style="color:var(--burgundy);margin-bottom:0.5rem;">تم استلام طلبكِ!</h3>
+          <p style="color:var(--text-gray);">سيتواصل معكِ فريقنا خلال 3-5 أيام عمل.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+  <script>
+    function submitAmb(e) {
+      e.preventDefault();
+      e.target.style.display = 'none';
+      document.getElementById('ambSuccess').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

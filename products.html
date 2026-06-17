@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منتجاتنا — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-filter-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+    .cb-filter-btn {
+      padding: 0.55rem 1.3rem; border-radius: 30px; border: 2px solid rgba(139,26,74,0.2);
+      background: var(--white); color: var(--text-gray); font-family: 'Tajawal', sans-serif;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    }
+    .cb-filter-btn:hover, .cb-filter-btn.active {
+      background: var(--burgundy); color: var(--white); border-color: var(--burgundy);
+    }
+    .cb-products-catalog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .cb-prod-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .cb-prod-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(139,26,74,0.2); }
+    .cb-prod-card.hidden { display: none; }
+    .cb-prod-img {
+      height: 220px; position: relative;
+      background: linear-gradient(135deg, #f9f0f5, #fce4ef);
+      display: flex; align-items: center; justify-content: center; font-size: 5rem;
+    }
+    .cb-prod-badge { position: absolute; top: 14px; right: 14px; background: var(--burgundy); color: var(--white); padding: 0.28rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .cb-prod-wish { position: absolute; top: 14px; left: 14px; width: 36px; height: 36px; border-radius: 50%; background: var(--white); border: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: var(--transition); }
+    .cb-prod-wish:hover { background: var(--burgundy); }
+    .cb-prod-body { padding: 1.4rem; }
+    .cb-prod-cat { font-size: 0.78rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+    .cb-prod-body h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.4rem; }
+    .cb-prod-body p { color: var(--text-gray); font-size: 0.88rem; margin-bottom: 1rem; line-height: 1.6; }
+    .cb-prod-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #f0e8ee; }
+    .cb-prod-price { font-size: 1.2rem; font-weight: 900; color: var(--burgundy); }
+    .cb-prod-stars { color: var(--gold); font-size: 0.85rem; }
+    .cb-prod-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    .cb-prod-btn { flex: 1; padding: 0.6rem; border-radius: 10px; border: none; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 0.85rem; font-weight: 700; transition: var(--transition); }
+    .cb-prod-btn-cart { background: var(--burgundy); color: var(--white); }
+    .cb-prod-btn-cart:hover { background: var(--burgundy-dark); }
+    .cb-prod-btn-wa { background: #25D366; color: var(--white); }
+    .cb-prod-btn-wa:hover { background: #1da851; }
+
+    /* Modal */
+    .cb-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
+    .cb-modal-overlay.open { display: flex; }
+    .cb-modal { background: var(--white); border-radius: 20px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2.5rem; position: relative; }
+    .cb-modal-close { position: absolute; top: 1.2rem; left: 1.2rem; width: 36px; height: 36px; border-radius: 50%; border: none; background: #f3f4f6; cursor: pointer; font-size: 1.2rem; }
+    .cb-modal-icon { font-size: 5rem; text-align: center; margin-bottom: 1.5rem; }
+    .cb-modal h2 { font-size: 1.5rem; font-weight: 900; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .cb-modal-price { font-size: 1.6rem; font-weight: 900; color: var(--gold-dark); margin-bottom: 1rem; }
+    .cb-modal p { color: var(--text-gray); line-height: 1.8; margin-bottom: 1.5rem; }
+    .cb-modal-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    @media (max-width: 900px) { .cb-products-catalog { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .cb-products-catalog { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>منتجاتنا</h1>
+      <p>مجموعة فاخرة من منتجات العناية بالبشرة بمكونات طبيعية</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>المنتجات</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">تسوّقي بذكاء</span>
+        <h2>اكتشفي منتجاتنا الفاخرة</h2>
+        <p>تصفّحي مجموعتنا الكاملة وابحثي عن ما يناسب بشرتكِ</p>
+      </div>
+
+      <div class="cb-filter-bar">
+        <button class="cb-filter-btn active" data-cat="all">الكل (9)</button>
+        <button class="cb-filter-btn" data-cat="cleansers">المنظفات</button>
+        <button class="cb-filter-btn" data-cat="moisturizers">المرطبات</button>
+        <button class="cb-filter-btn" data-cat="sunscreens">الواقي الشمسي</button>
+        <button class="cb-filter-btn" data-cat="serums">السيروم</button>
+        <button class="cb-filter-btn" data-cat="acne">حب الشباب</button>
+        <button class="cb-filter-btn" data-cat="whitening">التفتيح</button>
+        <button class="cb-filter-btn" data-cat="hair">الشعر</button>
+        <button class="cb-filter-btn" data-cat="body">الجسم</button>
+        <button class="cb-filter-btn" data-cat="natural">الطبيعي</button>
+      </div>
+
+      <div class="cb-products-catalog" id="productsGrid">
+        <div class="cb-prod-card cb-fade-in" data-cat="cleansers" onclick="openModal('رغوة التنظيف المضيئة','cleansers','45','🧴','منظف يومي لطيف لجميع أنواع البشرة. غني بمستخلصات الورد والجلايكوليك أسيد لتنظيف عميق وترطيب مستمر. مناسب للاستخدام الصباحي والمسائي.','★★★★★')">
+          <div class="cb-prod-img">🧴<span class="cb-prod-badge">الأكثر مبيعاً</span><button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">منظفات</div>
+            <h3>رغوة التنظيف المضيئة</h3>
+            <p>منظف يومي لطيف لجميع أنواع البشرة</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">45$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: رغوة التنظيف المضيئة','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="moisturizers" onclick="openModal('مرطب الذهب الوردي','moisturizers','75','🌹','ترطيب عميق مع مستخلص الورد الدمشقي وزيت الأرغان. يغذي البشرة الجافة والحساسة ويمنحها نعومة استثنائية لساعات طويلة. مثالي للاستخدام اليومي والليلي.','★★★★★')">
+          <div class="cb-prod-img">🌹<button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">مرطبات</div>
+            <h3>مرطب الذهب الوردي</h3>
+            <p>ترطيب عميق بمستخلص الورد</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">75$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: مرطب الذهب الوردي','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="sunscreens" onclick="openModal('واقي شمس UV Shield SPF50+','sunscreens','60','☀️','حماية شاملة من الأشعة فوق البنفسجية UVA وUVB. قوام خفيف غير دهني يناسب الطقس العربي الحار. لا يترك أثراً أبيض ومثالي تحت المكياج.','★★★★☆')">
+          <div class="cb-prod-img">☀️<span class="cb-prod-badge">ضروري</span><button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">واقي شمسي</div>
+            <h3>واقي شمس UV Shield SPF50+</h3>
+            <p>حماية شاملة خفيفة الوزن</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">60$</span><span class="cb-prod-stars">★★★★☆</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: واقي شمس UV Shield','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="serums" onclick="openModal('سيروم فيتامين C','serums','90','✨','سيروم مضيء بنسبة 15% فيتامين C مستقر. يوحد لون البشرة، يقلل البقع الداكنة، ويمنح إشراقاً فورياً. يحتوي على هيالورونيك أسيد للترطيب العميق. استخدمي صباحاً قبل الواقي الشمسي.','★★★★★')">
+          <div class="cb-prod-img">✨<span class="cb-prod-badge">جديد</span><button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">سيروم</div>
+            <h3>سيروم فيتامين C</h3>
+            <p>سيروم مضيء بنسبة 15% فيتامين C</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">90$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: سيروم فيتامين C','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="acne" onclick="openModal('مصحح البقع Clear Skin','acne','40','🫧','مصحح بقع سريع المفعول يستهدف حب الشباب والبقع الحمراء. يحتوي على حمض الساليسيليك 2% والزنك لتقليل الالتهاب وتجفيف البثور في وقت قياسي.','★★★★☆')">
+          <div class="cb-prod-img">🫧<button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">حب الشباب</div>
+            <h3>مصحح البقع Clear Skin</h3>
+            <p>مصحح بقع سريع المفعول</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">40$</span><span class="cb-prod-stars">★★★★☆</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: مصحح البقع Clear Skin','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="whitening" onclick="openModal('كريم التفتيح Lumina','whitening','85','💎','كريم متقدم لتوحيد لون البشرة وتقليل البقع الداكنة والكلف. يحتوي على نياسيناميد 10% وألفا أربوتين لتفتيح آمن وفعّال. نتائج ملموسة خلال 4 أسابيع.','★★★★★')">
+          <div class="cb-prod-img">💎<span class="cb-prod-badge">مميز</span><button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">تفتيح</div>
+            <h3>كريم التفتيح Lumina</h3>
+            <p>توحيد اللون وتقليل البقع الداكنة</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">85$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: كريم التفتيح Lumina','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="hair" onclick="openModal('زيت الأرغان المغربي','hair','55','💆','زيت الأرغان المغربي النقي 100% لتغذية الشعر وإعادة بريقه وقوته. يحمي الشعر من الحرارة والتلف، يقلل التقصف، ويمنح لمعاناً طبيعياً من الجذر للطرف.','★★★★☆')">
+          <div class="cb-prod-img">💆<button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">شعر</div>
+            <h3>زيت الأرغان المغربي</h3>
+            <p>زيت تغذية مغربي مغذٍّ للشعر</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">55$</span><span class="cb-prod-stars">★★★★☆</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: زيت الأرغان المغربي','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="body" onclick="openModal('لوشن الجسم الحريري','body','50','🧖','لوشن جسم فاخر بقوام حريري خفيف يُرطب البشرة طوال اليوم. غني بزبدة الشيا وفيتامين E لبشرة ناعمة ومشرقة. رائحة زهور لطيفة ومنعشة.','★★★★★')">
+          <div class="cb-prod-img">🧖<span class="cb-prod-badge">الأفضل</span><button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">جسم</div>
+            <h3>لوشن الجسم الحريري</h3>
+            <p>ترطيب فاخر طوال اليوم</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">50$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: لوشن الجسم الحريري','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cb-prod-card cb-fade-in" data-cat="natural" onclick="openModal('زيت الوردبري الطبيعي','natural','70','🌸','زيت بذور الوردبري النقي 100% المضغوط على البارد. ثري بالأوميغا 3 وفيتامين A لتجديد الخلايا وتقليل الندوب والخطوط الدقيقة. مثالي للعناية الليلية.','★★★★★')">
+          <div class="cb-prod-img">🌸<button class="cb-prod-wish" onclick="event.stopPropagation()">🤍</button></div>
+          <div class="cb-prod-body">
+            <div class="cb-prod-cat">طبيعي</div>
+            <h3>زيت الوردبري الطبيعي</h3>
+            <p>زيت بذور الوردبري النقي 100%</p>
+            <div class="cb-prod-footer"><span class="cb-prod-price">70$</span><span class="cb-prod-stars">★★★★★</span></div>
+            <div class="cb-prod-actions">
+              <button class="cb-prod-btn cb-prod-btn-cart" onclick="event.stopPropagation()">أضيفي للسلة</button>
+              <button class="cb-prod-btn cb-prod-btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/249123456789?text=أريد طلب: زيت الوردبري','_blank')">💬</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="cb-modal-overlay" id="prodModal" onclick="closeModal(event)">
+    <div class="cb-modal">
+      <button class="cb-modal-close" onclick="document.getElementById('prodModal').classList.remove('open')">✕</button>
+      <div class="cb-modal-icon" id="modalIcon"></div>
+      <h2 id="modalName"></h2>
+      <div class="cb-modal-price" id="modalPrice"></div>
+      <p id="modalDesc"></p>
+      <div class="cb-prod-stars" id="modalStars" style="font-size:1.2rem;margin-bottom:1.5rem;"></div>
+      <div class="cb-modal-actions">
+        <a id="modalWa" href="#" target="_blank" class="cb-btn cb-btn-gold">💬 اطلبي عبر واتساب</a>
+        <button onclick="document.getElementById('prodModal').classList.remove('open')" class="cb-btn cb-btn-outline">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+  <script>
+    // Filter
+    document.querySelectorAll('.cb-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cb-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.cb-prod-card').forEach(card => {
+          card.classList.toggle('hidden', cat !== 'all' && card.dataset.cat !== cat);
+        });
+      });
+    });
+
+    // Modal
+    function openModal(name, cat, price, icon, desc, stars) {
+      document.getElementById('modalName').textContent = name;
+      document.getElementById('modalPrice').textContent = price + '$';
+      document.getElementById('modalIcon').textContent = icon;
+      document.getElementById('modalDesc').textContent = desc;
+      document.getElementById('modalStars').textContent = stars;
+      document.getElementById('modalWa').href = `https://wa.me/249123456789?text=أريد طلب: ${name}`;
+      document.getElementById('prodModal').classList.add('open');
+    }
+    function closeModal(e) {
+      if (e.target.id === 'prodModal') document.getElementById('prodModal').classList.remove('open');
+    }
+  </script>
+</body>
+</html>

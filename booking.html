@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>احجزي موعدك — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-booking-layout { display: grid; grid-template-columns: 1fr 360px; gap: 3rem; }
+    .cb-steps-indicator { display: flex; gap: 0; margin-bottom: 3rem; }
+    .cb-step {
+      flex: 1; text-align: center; position: relative; padding-bottom: 1rem;
+      border-bottom: 3px solid #e5e7eb;
+    }
+    .cb-step.active { border-bottom-color: var(--burgundy); }
+    .cb-step.done { border-bottom-color: var(--gold); }
+    .cb-step-num {
+      width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 0.5rem;
+      background: #e5e7eb; color: var(--text-gray); font-weight: 800; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cb-step.active .cb-step-num { background: var(--burgundy); color: var(--white); }
+    .cb-step.done .cb-step-num { background: var(--gold); color: var(--white); }
+    .cb-step-label { font-size: 0.85rem; color: var(--text-gray); font-weight: 600; }
+    .cb-step.active .cb-step-label { color: var(--burgundy); }
+
+    .cb-step-content { display: none; }
+    .cb-step-content.active { display: block; }
+
+    .cb-services-select-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .cb-service-select-card {
+      border: 2px solid #e5e7eb; border-radius: var(--radius); padding: 1.5rem 1rem;
+      text-align: center; cursor: pointer; transition: var(--transition);
+    }
+    .cb-service-select-card:hover { border-color: var(--burgundy); background: rgba(139,26,74,0.04); }
+    .cb-service-select-card.selected { border-color: var(--burgundy); background: rgba(139,26,74,0.06); }
+    .cb-service-select-card .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .cb-service-select-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
+
+    .cb-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    .cb-confirmation { background: linear-gradient(135deg, #f9f0f5, #fce4ef); border-radius: var(--radius); padding: 2rem; }
+    .cb-confirmation h3 { font-size: 1.2rem; font-weight: 800; color: var(--burgundy); margin-bottom: 1.5rem; }
+    .cb-confirm-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(139,26,74,0.1); font-size: 0.95rem; }
+    .cb-confirm-row:last-child { border-bottom: none; }
+    .cb-confirm-label { color: var(--text-gray); }
+    .cb-confirm-value { font-weight: 700; color: var(--text-dark); }
+
+    .cb-booking-sidebar { position: sticky; top: 90px; }
+    .cb-sidebar-card { background: var(--white); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+    .cb-sidebar-card h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 1.2rem; padding-bottom: 0.75rem; border-bottom: 2px solid #f0e8ee; }
+    .cb-info-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; }
+    .cb-info-icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .cb-info-text strong { display: block; font-size: 0.88rem; color: var(--text-dark); }
+    .cb-info-text span { font-size: 0.82rem; color: var(--text-gray); }
+
+    .cb-success-msg { display: none; text-align: center; padding: 3rem 2rem; }
+    .cb-success-msg .check { font-size: 5rem; margin-bottom: 1rem; }
+    .cb-success-msg h2 { font-size: 1.8rem; font-weight: 900; color: var(--burgundy); margin-bottom: 0.75rem; }
+    .cb-success-msg p { color: var(--text-gray); margin-bottom: 2rem; }
+
+    @media (max-width: 900px) {
+      .cb-booking-layout { grid-template-columns: 1fr; }
+      .cb-form-row { grid-template-columns: 1fr; }
+      .cb-services-select-grid { grid-template-columns: 1fr 1fr; }
+      .cb-booking-sidebar { position: static; }
+    }
+    @media (max-width: 500px) {
+      .cb-services-select-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>احجزي موعدك ✨</h1>
+      <p>خطوات بسيطة للحصول على استشارة متخصصة تناسبكِ</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>الحجز</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-booking-layout">
+        <div class="cb-booking-form-area">
+          <!-- Steps Indicator -->
+          <div class="cb-steps-indicator">
+            <div class="cb-step active" id="step-ind-1">
+              <div class="cb-step-num">1</div>
+              <div class="cb-step-label">اختاري الخدمة</div>
+            </div>
+            <div class="cb-step" id="step-ind-2">
+              <div class="cb-step-num">2</div>
+              <div class="cb-step-label">بياناتك الشخصية</div>
+            </div>
+            <div class="cb-step" id="step-ind-3">
+              <div class="cb-step-num">3</div>
+              <div class="cb-step-label">تأكيد الحجز</div>
+            </div>
+          </div>
+
+          <!-- Step 1: Service Selection -->
+          <div class="cb-step-content active" id="step1">
+            <h2 style="font-size:1.4rem;font-weight:800;color:var(--burgundy);margin-bottom:0.5rem;">اختاري الخدمة المطلوبة</h2>
+            <p style="color:var(--text-gray);margin-bottom:2rem;">يمكنكِ اختيار خدمة واحدة أو أكثر</p>
+            <div class="cb-services-select-grid" id="serviceGrid">
+              <div class="cb-service-select-card" data-service="تحليل البشرة" onclick="toggleService(this)">
+                <span class="icon">🔬</span><h4>تحليل البشرة</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="علاجات الوجه" onclick="toggleService(this)">
+                <span class="icon">✨</span><h4>علاجات الوجه</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="علاج حب الشباب" onclick="toggleService(this)">
+                <span class="icon">💊</span><h4>علاج حب الشباب</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="علاج التصبغات" onclick="toggleService(this)">
+                <span class="icon">🌟</span><h4>علاج التصبغات</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="مكافحة الشيخوخة" onclick="toggleService(this)">
+                <span class="icon">⏰</span><h4>مكافحة الشيخوخة</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="إشراق البشرة" onclick="toggleService(this)">
+                <span class="icon">💫</span><h4>إشراق البشرة</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="استشارة جمال" onclick="toggleService(this)">
+                <span class="icon">💄</span><h4>استشارة جمال</h4>
+              </div>
+              <div class="cb-service-select-card" data-service="استشارة أونلاين" onclick="toggleService(this)">
+                <span class="icon">💻</span><h4>استشارة أونلاين</h4>
+              </div>
+            </div>
+            <button class="cb-btn cb-btn-primary" onclick="goStep(2)">التالي — بياناتك الشخصية ←</button>
+          </div>
+
+          <!-- Step 2: Personal Info -->
+          <div class="cb-step-content" id="step2">
+            <h2 style="font-size:1.4rem;font-weight:800;color:var(--burgundy);margin-bottom:0.5rem;">بياناتك الشخصية</h2>
+            <p style="color:var(--text-gray);margin-bottom:2rem;">يرجى تعبئة البيانات بدقة لضمان التواصل معكِ</p>
+            <div class="cb-form-row">
+              <div class="cb-form-group">
+                <label>الاسم الكامل *</label>
+                <input type="text" id="fName" placeholder="اسمكِ الكامل" />
+              </div>
+              <div class="cb-form-group">
+                <label>رقم الهاتف / واتساب *</label>
+                <input type="tel" id="fPhone" placeholder="+249 ..." />
+              </div>
+            </div>
+            <div class="cb-form-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" id="fEmail" placeholder="example@email.com" />
+            </div>
+            <div class="cb-form-row">
+              <div class="cb-form-group">
+                <label>التاريخ المفضل *</label>
+                <input type="date" id="fDate" />
+              </div>
+              <div class="cb-form-group">
+                <label>الوقت المفضل</label>
+                <select id="fTime">
+                  <option value="">اختاري الوقت</option>
+                  <option>9:00 صباحاً</option>
+                  <option>10:00 صباحاً</option>
+                  <option>11:00 صباحاً</option>
+                  <option>12:00 ظهراً</option>
+                  <option>2:00 مساءً</option>
+                  <option>3:00 مساءً</option>
+                  <option>4:00 مساءً</option>
+                  <option>5:00 مساءً</option>
+                  <option>7:00 مساءً</option>
+                </select>
+              </div>
+            </div>
+            <div class="cb-form-group">
+              <label>نوع الاستشارة</label>
+              <select id="fType">
+                <option value="حضورية">حضورية</option>
+                <option value="أونلاين">أونلاين (فيديو كول)</option>
+                <option value="واتساب">واتساب</option>
+              </select>
+            </div>
+            <div class="cb-form-group">
+              <label>ملاحظات أو أسئلة إضافية</label>
+              <textarea id="fNotes" placeholder="أخبرينا أكثر عن مشكلة بشرتكِ أو ما تودين الاستفسار عنه..."></textarea>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <button class="cb-btn cb-btn-outline" onclick="goStep(1)">← رجوع</button>
+              <button class="cb-btn cb-btn-primary" onclick="goStep(3)">التالي — مراجعة الحجز ←</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Confirmation -->
+          <div class="cb-step-content" id="step3">
+            <h2 style="font-size:1.4rem;font-weight:800;color:var(--burgundy);margin-bottom:0.5rem;">مراجعة وتأكيد الحجز</h2>
+            <p style="color:var(--text-gray);margin-bottom:2rem;">تأكدي من صحة البيانات قبل الإرسال</p>
+            <div class="cb-confirmation" id="confirmationBox">
+              <h3>تفاصيل الحجز</h3>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">الخدمة المطلوبة</span><span class="cb-confirm-value" id="confService">—</span></div>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">الاسم</span><span class="cb-confirm-value" id="confName">—</span></div>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">الهاتف</span><span class="cb-confirm-value" id="confPhone">—</span></div>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">البريد الإلكتروني</span><span class="cb-confirm-value" id="confEmail">—</span></div>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">التاريخ والوقت</span><span class="cb-confirm-value" id="confDateTime">—</span></div>
+              <div class="cb-confirm-row"><span class="cb-confirm-label">نوع الاستشارة</span><span class="cb-confirm-value" id="confType">—</span></div>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+              <button class="cb-btn cb-btn-outline" onclick="goStep(2)">← تعديل</button>
+              <button class="cb-btn cb-btn-gold" onclick="submitBooking()">✅ تأكيد الحجز</button>
+              <a id="waBookingLink" href="#" target="_blank" class="cb-btn" style="background:#25D366;color:#fff;">💬 واتساب مباشر</a>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="cb-success-msg" id="successMsg">
+            <div class="check">✅</div>
+            <h2>تم استلام طلب حجزكِ!</h2>
+            <p>سيتواصل معكِ فريقنا خلال 24 ساعة لتأكيد الموعد. يمكنكِ أيضاً التواصل معنا مباشرة عبر واتساب.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <a href="https://wa.me/249123456789" target="_blank" class="cb-btn cb-btn-gold">💬 تواصل عبر واتساب</a>
+              <a href="index.html" class="cb-btn cb-btn-outline">العودة للرئيسية</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="cb-booking-sidebar">
+          <div class="cb-sidebar-card">
+            <h4>معلومات مفيدة</h4>
+            <div class="cb-info-row">
+              <div class="cb-info-icon">📅</div>
+              <div class="cb-info-text"><strong>ساعات العمل</strong><span>السبت – الخميس: 9 ص – 9 م</span></div>
+            </div>
+            <div class="cb-info-row">
+              <div class="cb-info-icon">💬</div>
+              <div class="cb-info-text"><strong>واتساب</strong><span>+249 123 456 789</span></div>
+            </div>
+            <div class="cb-info-row">
+              <div class="cb-info-icon">📍</div>
+              <div class="cb-info-text"><strong>الموقع</strong><span>السودان والإمارات</span></div>
+            </div>
+            <div class="cb-info-row">
+              <div class="cb-info-icon">💻</div>
+              <div class="cb-info-text"><strong>استشارة أونلاين</strong><span>متاحة 7 أيام في الأسبوع</span></div>
+            </div>
+          </div>
+          <div class="cb-sidebar-card" style="background:linear-gradient(135deg,var(--burgundy),var(--burgundy-light));color:#fff;">
+            <h4 style="color:var(--gold-light);">استشارة واتساب مجانية</h4>
+            <p style="color:rgba(255,255,255,0.85);font-size:0.9rem;margin-bottom:1.5rem;">لا وقت للانتظار؟ تواصلي معنا مباشرة الآن عبر واتساب!</p>
+            <a href="https://wa.me/249123456789?text=مرحباً، أريد حجز موعد" target="_blank" class="cb-btn cb-btn-gold" style="width:100%;justify-content:center;">💬 تواصل الآن</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+  <script>
+    let selectedServices = [];
+    function toggleService(el) {
+      el.classList.toggle('selected');
+      const s = el.dataset.service;
+      if (selectedServices.includes(s)) selectedServices = selectedServices.filter(x => x !== s);
+      else selectedServices.push(s);
+    }
+
+    function goStep(n) {
+      if (n === 3) fillConfirmation();
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById('step' + i).classList.toggle('active', i === n);
+        const ind = document.getElementById('step-ind-' + i);
+        ind.classList.remove('active', 'done');
+        if (i === n) ind.classList.add('active');
+        else if (i < n) ind.classList.add('done');
+      }
+    }
+
+    function fillConfirmation() {
+      document.getElementById('confService').textContent = selectedServices.join('، ') || '—';
+      document.getElementById('confName').textContent = document.getElementById('fName').value || '—';
+      document.getElementById('confPhone').textContent = document.getElementById('fPhone').value || '—';
+      document.getElementById('confEmail').textContent = document.getElementById('fEmail').value || '—';
+      const date = document.getElementById('fDate').value;
+      const time = document.getElementById('fTime').value;
+      document.getElementById('confDateTime').textContent = (date || '—') + (time ? ' — ' + time : '');
+      document.getElementById('confType').textContent = document.getElementById('fType').value || '—';
+      const name = document.getElementById('fName').value;
+      const phone = document.getElementById('fPhone').value;
+      const services = selectedServices.join('، ');
+      document.getElementById('waBookingLink').href = `https://wa.me/249123456789?text=مرحباً، أود حجز موعد%0aالاسم: ${name}%0aالهاتف: ${phone}%0aالخدمة: ${services}%0aالتاريخ: ${date} ${time}`;
+    }
+
+    function submitBooking() {
+      document.getElementById('step3').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

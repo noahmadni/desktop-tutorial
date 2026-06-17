@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>خدماتنا — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-services-full-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .cb-service-full-card {
+      background: var(--white); border-radius: var(--radius); padding: 2.5rem;
+      box-shadow: var(--shadow); transition: var(--transition);
+      display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start;
+      border-right: 5px solid transparent;
+    }
+    .cb-service-full-card:hover { transform: translateY(-6px); border-right-color: var(--gold); box-shadow: 0 30px 70px rgba(139,26,74,0.15); }
+    .cb-service-full-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: linear-gradient(135deg, #f9f0f5, #fce4ef);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; flex-shrink: 0;
+    }
+    .cb-service-full-body h3 { font-size: 1.25rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.6rem; }
+    .cb-service-full-body p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+    .cb-service-benefits-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .cb-benefit-tag {
+      background: linear-gradient(135deg, rgba(139,26,74,0.08), rgba(212,168,67,0.08));
+      color: var(--burgundy); padding: 0.3rem 0.85rem; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(139,26,74,0.15);
+    }
+    .cb-online-banner {
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+      border-radius: var(--radius); padding: 3rem; text-align: center; color: var(--white);
+      margin-top: 3rem;
+    }
+    .cb-online-banner h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 0.75rem; }
+    .cb-online-banner p { color: rgba(255,255,255,0.85); margin-bottom: 2rem; }
+    .cb-online-banner .cb-btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    @media (max-width: 768px) { .cb-services-full-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>خدماتنا</h1>
+      <p>10 خدمات متخصصة لكل احتياجات بشرتكِ</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>خدماتنا</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">خدماتنا المتخصصة</span>
+        <h2>علاجات احترافية لكل نوع بشرة</h2>
+        <p>يقدم فريقنا المعتمد من الخبراء مجموعة شاملة من الخدمات المصممة خصيصاً لاحتياجات بشرتكِ</p>
+      </div>
+
+      <div class="cb-services-full-grid">
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">🔬</div>
+          <div class="cb-service-full-body">
+            <h3>تحليل البشرة المتقدم</h3>
+            <p>تقييم شامل لنوع بشرتكِ ومشاكلها باستخدام أحدث أجهزة الفحص الجلدي. نحدد نوع بشرتكِ، مستوى الترطيب، التصبغات، وبنية الكولاجين لنضع خطة علاجية مخصصة 100%.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">نتائج دقيقة</span>
+              <span class="cb-benefit-tag">جلسة 30 دقيقة</span>
+              <span class="cb-benefit-tag">تقرير تفصيلي</span>
+              <span class="cb-benefit-tag">خطة مخصصة</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">✨</div>
+          <div class="cb-service-full-body">
+            <h3>علاجات الوجه المخصصة</h3>
+            <p>جلسات فيشيال مصممة خصيصاً لاحتياجاتكِ بعد تحليل دقيق للبشرة. تستهدف الترطيب العميق، الإشراق الفوري، وتجديد الخلايا الميتة لبشرة تنبض بالحيوية.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">إشراق فوري</span>
+              <span class="cb-benefit-tag">تنظيف عميق</span>
+              <span class="cb-benefit-tag">ترطيب مكثف</span>
+              <span class="cb-benefit-tag">استرخاء تام</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">💊</div>
+          <div class="cb-service-full-body">
+            <h3>علاج حب الشباب</h3>
+            <p>بروتوكولات علاجية طبية متكاملة تجمع بين العلاجات الموضعية والجلسات الاحترافية لمكافحة حب الشباب والحد من ظهور الندبات ومنع تكرار الانتكاسات.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">بشرة نظيفة</span>
+              <span class="cb-benefit-tag">تقليل الندبات</span>
+              <span class="cb-benefit-tag">منع الانتكاسات</span>
+              <span class="cb-benefit-tag">نتائج دائمة</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">🌟</div>
+          <div class="cb-service-full-body">
+            <h3>علاج التصبغات والبقع الداكنة</h3>
+            <p>بروتوكولات مثبتة علمياً لعلاج البقع الداكنة، الكلف، وعدم انتظام لون البشرة. نستخدم تقنيات متقدمة ومكونات نشطة لنتائج ملموسة وسريعة.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">توحيد اللون</span>
+              <span class="cb-benefit-tag">تبييض آمن</span>
+              <span class="cb-benefit-tag">إشراق طبيعي</span>
+              <span class="cb-benefit-tag">نتائج مستدامة</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">⏰</div>
+          <div class="cb-service-full-body">
+            <h3>برامج مكافحة الشيخوخة</h3>
+            <p>برامج شاملة ومتكاملة لتقليل التجاعيد، شد البشرة، واستعادة الإشراق الشبابي. تعتمد على أحدث تقنيات تنشيط الكولاجين والعلاجات المضادة للأكسدة.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">تقليل التجاعيد</span>
+              <span class="cb-benefit-tag">شد البشرة</span>
+              <span class="cb-benefit-tag">تنشيط الكولاجين</span>
+              <span class="cb-benefit-tag">إشراق شبابي</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">💫</div>
+          <div class="cb-service-full-body">
+            <h3>بروتوكول إشراق البشرة C Beauty</h3>
+            <p>بروتوكولنا الحصري المصمم خصيصاً لمنح البشرة إشراقاً ولمعاناً استثنائياً. يجمع بين تقشير لطيف وتغذية مكثفة وترطيب عميق لبشرة مضيئة كالبدر.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">إشراق فوري</span>
+              <span class="cb-benefit-tag">توحيد اللون</span>
+              <span class="cb-benefit-tag">ترطيب مكثف</span>
+              <span class="cb-benefit-tag">بريق طبيعي</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">💄</div>
+          <div class="cb-service-full-body">
+            <h3>استشارات الجمال الشخصية</h3>
+            <p>جلسات فردية مع خبيرات جمال معتمدات لوضع خطة عناية شخصية شاملة تغطي البشرة والشعر والعناية اليومية، مع متابعة دورية لضمان النتائج.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">نصائح متخصصة</span>
+              <span class="cb-benefit-tag">خطة مخصصة</span>
+              <span class="cb-benefit-tag">متابعة دورية</span>
+              <span class="cb-benefit-tag">نتائج مضمونة</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">💇</div>
+          <div class="cb-service-full-body">
+            <h3>استشارات العناية بالشعر</h3>
+            <p>تحليل احترافي لصحة الشعر وفروة الرأس مع توصيات علاجية مخصصة. نعالج مشاكل التساقط، الجفاف، والتلف لتحصلي على شعر صحي ولامع.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">شعر أكثر صحة</span>
+              <span class="cb-benefit-tag">عناية بالفروة</span>
+              <span class="cb-benefit-tag">تقليل التساقط</span>
+              <span class="cb-benefit-tag">نمو طبيعي</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">📋</div>
+          <div class="cb-service-full-body">
+            <h3>خطط العناية الشخصية 30/60/90 يوم</h3>
+            <p>خطط عناية مخصصة لـ30 أو 60 أو 90 يوماً تحدد كل خطوة في رحلة تحول بشرتكِ، بما فيها المنتجات المناسبة، الروتين اليومي والليلي، والنصائح الغذائية.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">خطة تفصيلية</span>
+              <span class="cb-benefit-tag">دليل المنتجات</span>
+              <span class="cb-benefit-tag">متابعة التقدم</span>
+              <span class="cb-benefit-tag">نتائج قابلة للقياس</span>
+            </div>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي الآن</a>
+          </div>
+        </div>
+
+        <div class="cb-service-full-card cb-fade-in">
+          <div class="cb-service-full-icon">💻</div>
+          <div class="cb-service-full-body">
+            <h3>استشارة أونلاين عبر الفيديو</h3>
+            <p>احصلي على استشارة متخصصة من راحة منزلكِ عبر مكالمة فيديو مع أحد خبرائنا المعتمدين. مثالية لعميلاتنا خارج السودان ودول الخليج.</p>
+            <div class="cb-service-benefits-list">
+              <span class="cb-benefit-tag">من أي مكان</span>
+              <span class="cb-benefit-tag">في نفس اليوم</span>
+              <span class="cb-benefit-tag">متابعة واتساب</span>
+              <span class="cb-benefit-tag">خطة مكتوبة</span>
+            </div>
+            <a href="https://wa.me/249123456789" target="_blank" class="cb-btn cb-btn-gold" style="font-size:0.9rem;padding:0.6rem 1.4rem;">احجزي عبر واتساب</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cb-online-banner cb-fade-in">
+        <h3>💻 استشارة أونلاين مجانية!</h3>
+        <p>لا تعرفين من أين تبدأين؟ احجزي استشارة أونلاين مجانية مع أحد خبرائنا واحصلي على توجيه مخصص لبشرتكِ.</p>
+        <div class="cb-btn-row">
+          <a href="booking.html" class="cb-btn cb-btn-gold">احجزي الآن ✨</a>
+          <a href="https://wa.me/249123456789" target="_blank" class="cb-btn cb-btn-white">💬 واتساب مباشر</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+</body>
+</html>

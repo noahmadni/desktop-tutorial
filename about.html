@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>من نحن — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .cb-story-visual {
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+      border-radius: 24px; padding: 3rem; text-align: center; color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .cb-story-visual::before {
+      content: '✦'; position: absolute; font-size: 12rem; opacity: 0.05;
+      top: -2rem; left: -2rem; line-height: 1;
+    }
+    .cb-story-visual .logo-big { font-size: 5rem; font-weight: 900; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+    .cb-story-visual p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.8; }
+    .cb-story-text h2 { font-size: 2rem; font-weight: 900; color: var(--burgundy); margin-bottom: 1.5rem; }
+    .cb-story-text p { color: var(--text-gray); line-height: 1.9; margin-bottom: 1.2rem; font-size: 1rem; }
+
+    .cb-mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cb-mission-card {
+      border-radius: var(--radius); padding: 2.5rem; border-right: 5px solid var(--gold);
+      background: var(--white); box-shadow: var(--shadow);
+    }
+    .cb-mission-card .icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .cb-mission-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.75rem; }
+    .cb-mission-card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.8; }
+
+    .cb-values-section { background: #f9f0f5; }
+    .cb-values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .cb-value-card { background: var(--white); border-radius: var(--radius); padding: 2rem; text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+    .cb-value-card:hover { transform: translateY(-8px); border-top: 3px solid var(--gold); }
+    .cb-value-card .icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .cb-value-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .cb-value-card p { color: var(--text-gray); font-size: 0.88rem; line-height: 1.7; }
+
+    .cb-team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .cb-team-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); text-align: center; transition: var(--transition); }
+    .cb-team-card:hover { transform: translateY(-8px); }
+    .cb-team-photo { height: 200px; background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light)); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .cb-team-info { padding: 1.5rem; }
+    .cb-team-info h4 { font-size: 1.1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.3rem; }
+    .cb-team-info .role { color: var(--gold-dark); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .cb-team-info p { color: var(--text-gray); font-size: 0.88rem; line-height: 1.7; }
+
+    .cb-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .cb-why-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.5rem; background: var(--white); border-radius: var(--radius); box-shadow: 0 4px 20px rgba(139,26,74,0.08); }
+    .cb-why-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .cb-why-item h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.4rem; }
+    .cb-why-item p { color: var(--text-gray); font-size: 0.88rem; line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .cb-story-grid { grid-template-columns: 1fr; }
+      .cb-mission-grid { grid-template-columns: 1fr; }
+      .cb-values-grid { grid-template-columns: 1fr 1fr; }
+      .cb-team-grid { grid-template-columns: 1fr 1fr; }
+      .cb-why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cb-values-grid { grid-template-columns: 1fr; }
+      .cb-team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>من نحن</h1>
+      <p>نحن سي بيوتي — شغف حقيقي بجمال المرأة العربية</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>من نحن</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-story-grid">
+        <div class="cb-story-visual cb-fade-in">
+          <div class="logo-big">✦ C Beauty</div>
+          <p>منذ تأسيسنا وحتى اليوم، نحن ملتزمون بتقديم أفضل تجربة عناية بالبشرة للمرأة العربية</p>
+          <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:center;">
+            <div><div style="font-size:1.8rem;font-weight:900;color:var(--gold-light);">2020</div><div style="font-size:0.8rem;opacity:0.7;">سنة التأسيس</div></div>
+            <div><div style="font-size:1.8rem;font-weight:900;color:var(--gold-light);">2+</div><div style="font-size:0.8rem;opacity:0.7;">دولة</div></div>
+          </div>
+        </div>
+        <div class="cb-story-text cb-fade-in">
+          <h2>قصة سي بيوتي</h2>
+          <p>تأسست C Beauty من شغف حقيقي بمساعدة كل امرأة على اكتشاف جمالها الطبيعي والثقة بنفسها. بدأت رحلتنا بحلم بسيط: أن نجعل العناية الاحترافية بالبشرة متاحة لكل امرأة عربية.</p>
+          <p>نجمع بين أحدث علوم الجلدية والمكونات الطبيعية لنقدم منتجات وعلاجات تعطي نتائج حقيقية وملموسة. كل منتج نختاره يمر بعملية اختيار دقيقة لضمان أعلى معايير الجودة والسلامة.</p>
+          <p>اليوم، نفخر بخدمة أكثر من 10,000 عميلة في السودان ودول الخليج، ونسعى كل يوم لتوسيع أفقنا وتقديم تجربة جمال استثنائية لكل امرأة تستحق الأفضل.</p>
+          <a href="booking.html" class="cb-btn cb-btn-primary" style="margin-top:1rem;">احجزي استشارة مجانية</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="cb-stats-bar">
+    <div class="cb-stats-grid">
+      <div><div class="cb-stat-num">+10,000</div><div class="cb-stat-label">عميلة سعيدة</div></div>
+      <div><div class="cb-stat-num">+500</div><div class="cb-stat-label">منتج فاخر</div></div>
+      <div><div class="cb-stat-num">+8,000</div><div class="cb-stat-label">استشارة ناجحة</div></div>
+      <div><div class="cb-stat-num">98%</div><div class="cb-stat-label">رضا العملاء</div></div>
+    </div>
+  </div>
+
+  <!-- MISSION & VISION -->
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">رسالتنا ورؤيتنا</span>
+        <h2>ما الذي يحركنا؟</h2>
+      </div>
+      <div class="cb-mission-grid">
+        <div class="cb-mission-card cb-fade-in">
+          <span class="icon">🎯</span>
+          <h3>رسالتنا</h3>
+          <p>جعل العناية الاحترافية بالبشرة متاحة وتعليمية وفعّالة — تمكين المرأة العربية في السودان ودول الخليج من الثقة بجمالها الطبيعي من خلال منتجات عالية الجودة وخبرات متخصصة.</p>
+        </div>
+        <div class="cb-mission-card cb-fade-in">
+          <span class="icon">🌟</span>
+          <h3>رؤيتنا</h3>
+          <p>أن نكون الوجهة الأولى لعناية البشرة في العالم العربي، معروفين بالجودة الاستثنائية والنتائج الحقيقية والتجربة الشخصية التي تجعل كل عميلة تشعر بأنها تستحق أفضل عناية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="cb-section cb-values-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">قيمنا</span>
+        <h2>ما الذي يميزنا؟</h2>
+      </div>
+      <div class="cb-values-grid">
+        <div class="cb-value-card cb-fade-in">
+          <span class="icon">💎</span>
+          <h4>الجودة أولاً</h4>
+          <p>كل منتج نختاره يخضع لاختبارات صارمة لضمان أعلى معايير الجودة والسلامة.</p>
+        </div>
+        <div class="cb-value-card cb-fade-in">
+          <span class="icon">🌿</span>
+          <h4>طبيعي وآمن</h4>
+          <p>نؤمن بقوة المكونات الطبيعية ونلتزم بمنتجات خالية من المواد الضارة.</p>
+        </div>
+        <div class="cb-value-card cb-fade-in">
+          <span class="icon">❤️</span>
+          <h4>العميلة أولاً</h4>
+          <p>كل قرار نتخذه يبدأ وينتهي بسؤال: ما الذي يفيد عميلتنا أكثر؟</p>
+        </div>
+        <div class="cb-value-card cb-fade-in">
+          <span class="icon">🔬</span>
+          <h4>العلم والخبرة</h4>
+          <p>فريقنا من أخصائيي البشرة المعتمدين يجمعون بين العلم والتجربة العملية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">فريقنا</span>
+        <h2>خبراء في خدمتكِ</h2>
+        <p>فريق متخصص من أخصائيي العناية بالبشرة والجمال</p>
+      </div>
+      <div class="cb-team-grid">
+        <div class="cb-team-card cb-fade-in">
+          <div class="cb-team-photo">👩‍⚕️</div>
+          <div class="cb-team-info">
+            <h4>د. أمل محمد</h4>
+            <div class="role">أخصائية الجلدية والتجميل</div>
+            <p>خبرة 10 سنوات في طب الجلد والعناية التجميلية. حاصلة على بورد جلدية من ألمانيا.</p>
+          </div>
+        </div>
+        <div class="cb-team-card cb-fade-in">
+          <div class="cb-team-photo">💄</div>
+          <div class="cb-team-info">
+            <h4>سارة العبدالله</h4>
+            <div class="role">خبيرة العناية بالبشرة</div>
+            <p>متخصصة في علاجات التفتيح ومكافحة الشيخوخة. معتمدة من المعهد الفرنسي للتجميل.</p>
+          </div>
+        </div>
+        <div class="cb-team-card cb-fade-in">
+          <div class="cb-team-photo">🌿</div>
+          <div class="cb-team-info">
+            <h4>نورا السلمان</h4>
+            <div class="role">خبيرة المكونات الطبيعية</div>
+            <p>متخصصة في العلاجات العشبية والمكونات الطبيعية لتكوين منتجات آمنة وفعّالة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="cb-section" style="background:#f9f0f5;">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">لماذا C Beauty؟</span>
+        <h2>ست أسباب تجعلنا الأفضل</h2>
+      </div>
+      <div class="cb-why-grid">
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">🏆</div>
+          <div><h4>منتجات مختارة بعناية</h4><p>كل منتج يمر بعملية اختيار دقيقة ومراجعة متخصصة قبل وصوله إليكِ.</p></div>
+        </div>
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">👩‍🔬</div>
+          <div><h4>خبراء معتمدون</h4><p>فريقنا من أخصائيي الجلدية المعتمدين يقدمون استشارات علمية دقيقة.</p></div>
+        </div>
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">📱</div>
+          <div><h4>خدمة أونلاين 24/7</h4><p>استشارات واتساب وفيديو كول في أي وقت ومن أي مكان.</p></div>
+        </div>
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">✅</div>
+          <div><h4>نتائج مضمونة</h4><p>98% من عميلاتنا يلاحظن تحسناً ملموساً في بشرتهن خلال 30 يوماً.</p></div>
+        </div>
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">🌍</div>
+          <div><h4>نصل إليكِ أينما كنتِ</h4><p>نخدم السودان وجميع دول الخليج العربي مع خدمة شحن سريعة وموثوقة.</p></div>
+        </div>
+        <div class="cb-why-item cb-fade-in">
+          <div class="cb-why-icon">💰</div>
+          <div><h4>أسعار تنافسية</h4><p>جودة عالمية بأسعار تناسب جميع الميزانيات. عروض وخصومات دورية.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cb-cta-banner" style="background:linear-gradient(135deg,var(--gold-dark),var(--gold));padding:4rem 2rem;text-align:center;">
+    <h2 style="color:#fff;font-size:2rem;font-weight:900;margin-bottom:1rem;">انضمي إلى عائلة سي بيوتي</h2>
+    <p style="color:rgba(255,255,255,0.9);margin-bottom:2rem;">+10,000 عميلة اخترن C Beauty. اخترنا أنتِ أيضاً.</p>
+    <a href="booking.html" class="cb-btn cb-btn-white">احجزي استشارتك المجانية</a>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+</body>
+</html>

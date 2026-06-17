@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تواصل معنا — C Beauty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-contact-layout { display: grid; grid-template-columns: 1fr 400px; gap: 3rem; }
+    .cb-contact-form-card { background: var(--white); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .cb-contact-form-card h3 { font-size: 1.4rem; font-weight: 800; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .cb-contact-form-card > p { color: var(--text-gray); margin-bottom: 2rem; }
+
+    .cb-contact-info-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+    .cb-contact-info-card {
+      background: var(--white); border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: var(--shadow); display: flex; gap: 1rem; align-items: center;
+      transition: var(--transition); text-decoration: none;
+    }
+    .cb-contact-info-card:hover { transform: translateX(-6px); box-shadow: 0 20px 50px rgba(139,26,74,0.15); }
+    .cb-contact-icon {
+      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+    }
+    .cb-contact-icon.burgundy { background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light)); }
+    .cb-contact-icon.gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
+    .cb-contact-icon.green { background: linear-gradient(135deg, #25D366, #1da851); }
+    .cb-contact-icon.blue { background: linear-gradient(135deg, #3b5998, #4c6cb0); }
+    .cb-contact-info-text strong { display: block; font-size: 0.9rem; color: var(--text-dark); font-weight: 800; margin-bottom: 0.2rem; }
+    .cb-contact-info-text span { font-size: 0.88rem; color: var(--text-gray); }
+
+    .cb-map-placeholder {
+      background: linear-gradient(135deg, #f0e8f0, #f9f0f5);
+      border-radius: var(--radius); height: 250px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; text-align: center; flex-direction: column; gap: 1rem;
+      margin-top: 1.5rem; border: 2px dashed rgba(139,26,74,0.2);
+    }
+    .cb-map-placeholder p { font-size: 0.9rem; color: var(--text-gray); }
+
+    .cb-social-section { background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy)); padding: 4rem 2rem; text-align: center; }
+    .cb-social-section h2 { color: var(--white); font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .cb-social-section p { color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; }
+    .cb-social-big-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .cb-social-big-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0.85rem 1.8rem; border-radius: 50px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(212,168,67,0.3);
+      color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .cb-social-big-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-4px); }
+    .cb-social-big-link span { font-size: 1.4rem; }
+
+    .cb-hours-section { background: #f9f0f5; }
+    .cb-hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cb-hours-card { background: var(--white); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+    .cb-hours-card h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 1.2rem; }
+    .cb-hours-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #f0e8ee; font-size: 0.9rem; }
+    .cb-hours-row:last-child { border-bottom: none; }
+    .cb-hours-row .day { color: var(--text-gray); }
+    .cb-hours-row .time { font-weight: 700; color: var(--text-dark); }
+    .cb-hours-row .closed { color: #ef4444; }
+
+    @media (max-width: 900px) {
+      .cb-contact-layout { grid-template-columns: 1fr; }
+      .cb-hours-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>تواصل معنا</h1>
+      <p>نحن دائماً هنا للإجابة على أسئلتكِ ومساعدتكِ</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>تواصل معنا</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-contact-layout">
+        <!-- Form -->
+        <div class="cb-contact-form-card cb-fade-in">
+          <h3>أرسلي رسالتكِ</h3>
+          <p>سنرد عليكِ خلال 24 ساعة</p>
+          <form onsubmit="submitContact(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+              <div class="cb-form-group">
+                <label>الاسم الكامل *</label>
+                <input type="text" required placeholder="اسمكِ" />
+              </div>
+              <div class="cb-form-group">
+                <label>رقم الهاتف *</label>
+                <input type="tel" required placeholder="+249 ..." />
+              </div>
+            </div>
+            <div class="cb-form-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" placeholder="example@email.com" />
+            </div>
+            <div class="cb-form-group">
+              <label>الموضوع</label>
+              <select>
+                <option>استفسار عن منتج</option>
+                <option>حجز موعد</option>
+                <option>متابعة طلب</option>
+                <option>شكوى أو اقتراح</option>
+                <option>برنامج السفراء</option>
+                <option>أخرى</option>
+              </select>
+            </div>
+            <div class="cb-form-group">
+              <label>رسالتكِ *</label>
+              <textarea required placeholder="اكتبي رسالتكِ هنا..."></textarea>
+            </div>
+            <button type="submit" class="cb-btn cb-btn-primary" style="width:100%;justify-content:center;">إرسال الرسالة ←</button>
+          </form>
+          <div id="contactSuccess" style="display:none;text-align:center;padding:2rem;">
+            <div style="font-size:3.5rem;margin-bottom:1rem;">✅</div>
+            <h3 style="color:var(--burgundy);margin-bottom:0.5rem;">تم إرسال رسالتكِ!</h3>
+            <p style="color:var(--text-gray);">سنتواصل معكِ في أقرب وقت ممكن.</p>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="cb-fade-in">
+          <div class="cb-contact-info-cards">
+            <a href="https://wa.me/249123456789" target="_blank" class="cb-contact-info-card">
+              <div class="cb-contact-icon green">💬</div>
+              <div class="cb-contact-info-text">
+                <strong>واتساب (الأسرع)</strong>
+                <span>+249 123 456 789 — رد خلال دقائق</span>
+              </div>
+            </a>
+            <a href="tel:+249123456789" class="cb-contact-info-card">
+              <div class="cb-contact-icon burgundy">📞</div>
+              <div class="cb-contact-info-text">
+                <strong>هاتف</strong>
+                <span>+249 123 456 789</span>
+              </div>
+            </a>
+            <a href="mailto:hello@cbeautysd.com" class="cb-contact-info-card">
+              <div class="cb-contact-icon gold">📧</div>
+              <div class="cb-contact-info-text">
+                <strong>البريد الإلكتروني</strong>
+                <span>hello@cbeautysd.com</span>
+              </div>
+            </a>
+            <div class="cb-contact-info-card">
+              <div class="cb-contact-icon burgundy">📍</div>
+              <div class="cb-contact-info-text">
+                <strong>موقعنا</strong>
+                <span>السودان — الخرطوم | الإمارات — دبي</span>
+              </div>
+            </div>
+          </div>
+          <div class="cb-map-placeholder">
+            <div>🗺️</div>
+            <p>الخرطوم، السودان<br/>دبي، الإمارات العربية المتحدة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="cb-section cb-hours-section">
+    <div class="cb-container">
+      <div class="cb-section-header cb-fade-in">
+        <span class="cb-section-tag">ساعات العمل</span>
+        <h2>متى يمكنكِ التواصل معنا؟</h2>
+      </div>
+      <div class="cb-hours-grid">
+        <div class="cb-hours-card cb-fade-in">
+          <h4>🏢 مركز الخرطوم</h4>
+          <div class="cb-hours-row"><span class="day">السبت – الخميس</span><span class="time">9:00 ص – 9:00 م</span></div>
+          <div class="cb-hours-row"><span class="day">الجمعة</span><span class="closed">مغلق</span></div>
+          <div style="margin-top:1rem;padding:1rem;background:rgba(212,168,67,0.08);border-radius:10px;font-size:0.85rem;color:var(--gold-dark);font-weight:600;">
+            💡 الاستشارة الأونلاين متاحة 7 أيام في الأسبوع
+          </div>
+        </div>
+        <div class="cb-hours-card cb-fade-in">
+          <h4>🌐 خدمة العملاء الإلكترونية</h4>
+          <div class="cb-hours-row"><span class="day">واتساب</span><span class="time">يومياً 8 ص – 11 م</span></div>
+          <div class="cb-hours-row"><span class="day">البريد الإلكتروني</span><span class="time">رد خلال 24 ساعة</span></div>
+          <div class="cb-hours-row"><span class="day">استشارة فيديو كول</span><span class="time">بموعد مسبق</span></div>
+          <div style="margin-top:1rem;padding:1rem;background:rgba(139,26,74,0.06);border-radius:10px;font-size:0.85rem;color:var(--burgundy);font-weight:600;">
+            ✅ متوسط وقت الرد على واتساب: أقل من 30 دقيقة
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <div class="cb-social-section">
+    <h2>تابعينا على السوشيال ميديا</h2>
+    <p>للحصول على نصائح يومية، عروض حصرية، وإلهام جمالي لا ينتهي</p>
+    <div class="cb-social-big-links">
+      <a href="https://instagram.com/cbeautysd" target="_blank" class="cb-social-big-link"><span>📸</span> انستغرام</a>
+      <a href="https://tiktok.com/@cbeautysd" target="_blank" class="cb-social-big-link"><span>🎵</span> تيك توك</a>
+      <a href="https://snapchat.com/add/cbeautysd" target="_blank" class="cb-social-big-link"><span>👻</span> سناب شات</a>
+      <a href="https://facebook.com/cbeautysd" target="_blank" class="cb-social-big-link"><span>📘</span> فيسبوك</a>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+  <script>
+    function submitContact(e) {
+      e.preventDefault();
+      e.target.style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

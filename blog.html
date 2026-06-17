@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مدونة C Beauty — نصائح ومعلومات العناية بالبشرة</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cb-blog-layout { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; }
+    .cb-blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cb-blog-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .cb-blog-card:hover { transform: translateY(-8px); box-shadow: 0 30px 70px rgba(139,26,74,0.18); }
+    .cb-blog-img {
+      height: 200px; position: relative;
+      display: flex; align-items: center; justify-content: center; font-size: 4rem;
+    }
+    .cb-blog-cat {
+      position: absolute; bottom: 1rem; right: 1rem;
+      background: var(--burgundy); color: var(--white);
+      padding: 0.25rem 0.85rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+    }
+    .cb-blog-body { padding: 1.5rem; }
+    .cb-blog-meta { font-size: 0.8rem; color: var(--text-gray); margin-bottom: 0.6rem; display: flex; gap: 1rem; }
+    .cb-blog-body h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.75rem; line-height: 1.5; }
+    .cb-blog-body p { color: var(--text-gray); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .cb-blog-read { color: var(--burgundy); font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
+    .cb-blog-read:hover { gap: 10px; }
+
+    /* Featured post */
+    .cb-blog-featured {
+      background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+      display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 2rem;
+    }
+    .cb-blog-featured-img {
+      min-height: 280px; background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+      display: flex; align-items: center; justify-content: center; font-size: 7rem;
+    }
+    .cb-blog-featured-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .cb-blog-featured-body .cb-section-tag { margin-bottom: 1rem; align-self: flex-start; }
+    .cb-blog-featured-body h2 { font-size: 1.4rem; font-weight: 900; color: var(--burgundy); margin-bottom: 1rem; line-height: 1.5; }
+    .cb-blog-featured-body p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+    /* Sidebar */
+    .cb-sidebar-widget { background: var(--white); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow); margin-bottom: 2rem; }
+    .cb-sidebar-widget h4 { font-size: 1rem; font-weight: 800; color: var(--burgundy); margin-bottom: 1.2rem; padding-bottom: 0.75rem; border-bottom: 2px solid #f0e8ee; }
+    .cb-cat-list { list-style: none; }
+    .cb-cat-list li { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #f5f0f3; font-size: 0.9rem; cursor: pointer; transition: var(--transition); }
+    .cb-cat-list li:hover { color: var(--burgundy); }
+    .cb-cat-count { background: rgba(139,26,74,0.08); color: var(--burgundy); padding: 0.15rem 0.6rem; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+    .cb-popular-post { display: flex; gap: 12px; margin-bottom: 1rem; align-items: flex-start; }
+    .cb-popular-icon { font-size: 2rem; flex-shrink: 0; }
+    .cb-popular-post h5 { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.2rem; line-height: 1.4; }
+    .cb-popular-post span { font-size: 0.78rem; color: var(--text-gray); }
+    .cb-newsletter { background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light)); border-radius: var(--radius); padding: 2rem; text-align: center; color: var(--white); }
+    .cb-newsletter h4 { color: var(--gold-light); margin-bottom: 0.5rem; }
+    .cb-newsletter p { color: rgba(255,255,255,0.8); font-size: 0.88rem; margin-bottom: 1.2rem; }
+    .cb-newsletter input { width: 100%; padding: 0.75rem 1rem; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; margin-bottom: 0.75rem; direction: rtl; }
+
+    @media (max-width: 900px) {
+      .cb-blog-layout { grid-template-columns: 1fr; }
+      .cb-blog-featured { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) { .cb-blog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="cb-page-hero">
+    <div class="cb-page-hero-content">
+      <h1>مدونة C Beauty</h1>
+      <p>نصائح متخصصة، أسرار الجمال، وكل ما تحتاجين معرفته عن العناية بالبشرة</p>
+      <div class="cb-breadcrumb">
+        <a href="index.html">الرئيسية</a> <span>/</span> <span>المدونة</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="cb-section">
+    <div class="cb-container">
+      <div class="cb-blog-layout">
+        <div>
+          <!-- Featured Post -->
+          <div class="cb-blog-featured cb-fade-in">
+            <div class="cb-blog-featured-img">💧</div>
+            <div class="cb-blog-featured-body">
+              <span class="cb-section-tag">مقال مميز</span>
+              <h2>دليلك الشامل لترطيب البشرة: كيف تحافظين على بشرة ممتلئة ومشرقة طوال اليوم</h2>
+              <p>الترطيب هو حجر الأساس في أي روتين عناية بالبشرة. اكتشفي الفرق بين أنواع المرطبات وكيف تختارين ما يناسب نوع بشرتكِ.</p>
+              <div style="display:flex;align-items:center;gap:1rem;">
+                <span style="font-size:0.82rem;color:var(--text-gray);">📅 15 مايو 2025 · 8 دقائق قراءة</span>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Grid -->
+          <div class="cb-section-header cb-fade-in" style="text-align:right;margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem;">أحدث المقالات</h2>
+          </div>
+          <div class="cb-blog-grid">
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#fff0e6,#ffe4cc);">
+                ☀️<span class="cb-blog-cat">واقي الشمس</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 10 مايو 2025</span><span>⏱ 5 دقائق</span></div>
+                <h3>لماذا يجب استخدام الواقي الشمسي يومياً حتى في الشتاء والمنزل؟</h3>
+                <p>الأشعة فوق البنفسجية موجودة حتى خلف السحاب وزجاج النوافذ. اكتشفي لماذا SPF ضرورة لا خيار.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#fff5e6,#ffebd4);">
+                🍊<span class="cb-blog-cat">مكونات فعّالة</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 5 مايو 2025</span><span>⏱ 6 دقائق</span></div>
+                <h3>فيتامين C وفوائده المذهلة للبشرة: كل ما تحتاجين معرفته</h3>
+                <p>من تفتيح البقع الداكنة إلى مكافحة الأكسدة — تعرّفي على أقوى مضاد أكسدة في عالم العناية بالبشرة.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#f0e6ff,#e6d4ff);">
+                🌙<span class="cb-blog-cat">روتين الليل</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 28 أبريل 2025</span><span>⏱ 7 دقائق</span></div>
+                <h3>روتين العناية الليلي المثالي: 5 خطوات لبشرة تتجدد أثناء نومكِ</h3>
+                <p>النوم وقت ذهبي لتجديد خلايا البشرة. تعلّمي كيف تستغلّينه بأفضل روتين ليلي.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#e6f5e6,#d4f0d4);">
+                🌿<span class="cb-blog-cat">مكونات طبيعية</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 20 أبريل 2025</span><span>⏱ 5 دقائق</span></div>
+                <h3>المكونات الطبيعية الأكثر فاعلية لعلاج حب الشباب بأمان</h3>
+                <p>شاي الأخضر، الزنك، حمض الساليسيليك — مكونات طبيعية تعطي نتائج مثل الأدوية.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#f9e6f0,#f5d4e8);">
+                🔬<span class="cb-blog-cat">علم الجلد</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 12 أبريل 2025</span><span>⏱ 8 دقائق</span></div>
+                <h3>ما هو حاجز البشرة ولماذا يجب الحفاظ عليه؟ دليل علمي مبسّط</h3>
+                <p>حاجز البشرة هو درعها الحامي. اكتشفي كيف يعمل وكيف تقوّيينه لبشرة أكثر صحة.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+
+            <div class="cb-blog-card cb-fade-in">
+              <div class="cb-blog-img" style="background:linear-gradient(135deg,#e6eeff,#d4e4ff);">
+                🥗<span class="cb-blog-cat">تغذية وجمال</span>
+              </div>
+              <div class="cb-blog-body">
+                <div class="cb-blog-meta"><span>📅 5 أبريل 2025</span><span>⏱ 6 دقائق</span></div>
+                <h3>الجمال من الداخل: أفضل الأطعمة لبشرة مشرقة وشعر قوي</h3>
+                <p>ما تأكلينه يظهر على بشرتكِ. اكتشفي الأطعمة التي تعزز إشراق البشرة وصحة الشعر.</p>
+                <a href="#" class="cb-blog-read">اقرئي المزيد ←</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+          <div class="cb-sidebar-widget cb-fade-in">
+            <h4>التصنيفات</h4>
+            <ul class="cb-cat-list">
+              <li><span>عناية بالبشرة</span><span class="cb-cat-count">12</span></li>
+              <li><span>مكونات فعّالة</span><span class="cb-cat-count">8</span></li>
+              <li><span>روتين يومي</span><span class="cb-cat-count">6</span></li>
+              <li><span>حب الشباب</span><span class="cb-cat-count">5</span></li>
+              <li><span>مكافحة الشيخوخة</span><span class="cb-cat-count">4</span></li>
+              <li><span>تغذية وجمال</span><span class="cb-cat-count">7</span></li>
+              <li><span>شعر وفروة رأس</span><span class="cb-cat-count">3</span></li>
+            </ul>
+          </div>
+
+          <div class="cb-sidebar-widget cb-fade-in">
+            <h4>الأكثر قراءة</h4>
+            <div class="cb-popular-post">
+              <span class="cb-popular-icon">☀️</span>
+              <div><h5>لماذا تحتاجين SPF كل يوم؟</h5><span>📅 مايو 2025 · 4.2K قراءة</span></div>
+            </div>
+            <div class="cb-popular-post">
+              <span class="cb-popular-icon">💧</span>
+              <div><h5>دليل ترطيب البشرة الشامل</h5><span>📅 مايو 2025 · 3.8K قراءة</span></div>
+            </div>
+            <div class="cb-popular-post">
+              <span class="cb-popular-icon">🍊</span>
+              <div><h5>فيتامين C للبشرة المشرقة</h5><span>📅 أبريل 2025 · 3.1K قراءة</span></div>
+            </div>
+          </div>
+
+          <div class="cb-newsletter cb-fade-in">
+            <h4>اشتركي في النشرة</h4>
+            <p>احصلي على أحدث نصائح العناية مباشرة في بريدكِ الإلكتروني</p>
+            <input type="email" placeholder="بريدكِ الإلكتروني" />
+            <button class="cb-btn cb-btn-gold" style="width:100%;justify-content:center;">اشتركي الآن ✨</button>
+          </div>
+
+          <div class="cb-sidebar-widget cb-fade-in" style="background:linear-gradient(135deg,#f9f0f5,#fce4ef);">
+            <h4>استشارة مجانية</h4>
+            <p style="font-size:0.88rem;color:var(--text-gray);margin-bottom:1rem;">هل لديكِ سؤال عن بشرتكِ؟ احجزي استشارة مجانية مع خبرائنا.</p>
+            <a href="booking.html" class="cb-btn cb-btn-primary" style="width:100%;justify-content:center;">احجزي الآن</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/shared.js"></script>
+</body>
+</html>
