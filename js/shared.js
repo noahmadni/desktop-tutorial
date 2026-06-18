@@ -1,13 +1,13 @@
 /* C Beauty - Shared Navigation & Footer */
 (function () {
   const pages = [
-    { label: 'الرئيسية', href: '/index.html' },
-    { label: 'من نحن', href: '/about.html' },
-    { label: 'خدماتنا', href: '/services.html' },
-    { label: 'منتجاتنا', href: '/products.html' },
-    { label: 'المدونة', href: '/blog.html' },
-    { label: 'برنامج السفراء', href: '/ambassador.html' },
-    { label: 'تواصل معنا', href: '/contact.html' },
+    { label: 'الرئيسية', href: 'index.html' },
+    { label: 'من نحن', href: 'about.html' },
+    { label: 'خدماتنا', href: 'services.html' },
+    { label: 'منتجاتنا', href: 'products.html' },
+    { label: 'المدونة', href: 'blog.html' },
+    { label: 'برنامج السفراء', href: 'ambassador.html' },
+    { label: 'تواصل معنا', href: 'contact.html' },
   ];
 
   function getCurrentPage() {
@@ -37,12 +37,12 @@
 
     placeholder.innerHTML = `
       <nav id="cb-nav">
-        <a href="/index.html" class="cb-nav-logo">
+        <a href="index.html" class="cb-nav-logo">
           <span>✦</span> C Beauty
         </a>
         <ul class="cb-nav-links">
           ${linksHTML}
-          <li><a href="/booking.html" class="cb-nav-cta">احجزي موعدك ✨</a></li>
+          <li><a href="booking.html" class="cb-nav-cta">احجزي موعدك ✨</a></li>
         </ul>
         <div class="cb-hamburger" id="cb-hamburger" onclick="cbToggleMenu()">
           <span></span><span></span><span></span>
@@ -50,7 +50,7 @@
       </nav>
       <div class="cb-mobile-menu" id="cb-mobile-menu">
         ${mobileLinksHTML}
-        <a href="/booking.html" style="background:linear-gradient(135deg,#D4A843,#C8722A);color:#fff;font-weight:700;text-align:center;border-radius:12px;margin-top:0.5rem;">احجزي موعدك ✨</a>
+        <a href="booking.html" style="background:linear-gradient(135deg,#D4A843,#C8722A);color:#fff;font-weight:700;text-align:center;border-radius:12px;margin-top:0.5rem;">احجزي موعدك ✨</a>
       </div>
     `;
 
@@ -86,23 +86,23 @@
           <div class="cb-footer-col">
             <h4>روابط سريعة</h4>
             <ul>
-              <li><a href="/index.html">الرئيسية</a></li>
-              <li><a href="/about.html">من نحن</a></li>
-              <li><a href="/services.html">خدماتنا</a></li>
-              <li><a href="/products.html">منتجاتنا</a></li>
-              <li><a href="/blog.html">المدونة</a></li>
-              <li><a href="/ambassador.html">برنامج السفراء</a></li>
+              <li><a href="index.html">الرئيسية</a></li>
+              <li><a href="about.html">من نحن</a></li>
+              <li><a href="services.html">خدماتنا</a></li>
+              <li><a href="products.html">منتجاتنا</a></li>
+              <li><a href="blog.html">المدونة</a></li>
+              <li><a href="ambassador.html">برنامج السفراء</a></li>
             </ul>
           </div>
           <div class="cb-footer-col">
             <h4>خدماتنا</h4>
             <ul>
-              <li><a href="/services.html">تحليل البشرة</a></li>
-              <li><a href="/services.html">علاج حب الشباب</a></li>
-              <li><a href="/services.html">علاج التصبغات</a></li>
-              <li><a href="/services.html">برامج مكافحة الشيخوخة</a></li>
-              <li><a href="/services.html">استشارة أونلاين</a></li>
-              <li><a href="/booking.html">احجزي موعدك</a></li>
+              <li><a href="services.html">تحليل البشرة</a></li>
+              <li><a href="services.html">علاج حب الشباب</a></li>
+              <li><a href="services.html">علاج التصبغات</a></li>
+              <li><a href="services.html">برامج مكافحة الشيخوخة</a></li>
+              <li><a href="services.html">استشارة أونلاين</a></li>
+              <li><a href="booking.html">احجزي موعدك</a></li>
             </ul>
           </div>
           <div class="cb-footer-col cb-footer-contact">
