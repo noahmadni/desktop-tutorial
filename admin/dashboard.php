@@ -285,6 +285,8 @@ tr:hover td{background:rgba(255,255,255,0.02)}
     <a href="?tab=about" class="nav-item <?= $activeTab==='about'?'active':'' ?>"><span class="icon">✨</span> About & Stats</a>
     <a href="?tab=products" class="nav-item <?= $activeTab==='products'?'active':'' ?>"><span class="icon">🛍️</span> Products</a>
     <a href="?tab=testimonials" class="nav-item <?= $activeTab==='testimonials'?'active':'' ?>"><span class="icon">💬</span> Testimonials</a>
+    <div class="nav-section">CRM</div>
+    <a href="../crm.html" target="_blank" class="nav-item" style="color:#C9A96E;"><span class="icon">👥</span> Customer CRM</a>
     <div class="nav-section">Settings</div>
     <a href="?tab=contact" class="nav-item <?= $activeTab==='contact'?'active':'' ?>"><span class="icon">📞</span> Contact & Social</a>
     <a href="?tab=password" class="nav-item <?= $activeTab==='password'?'active':'' ?>"><span class="icon">🔐</span> Change Password</a>
@@ -325,6 +327,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
     <a href="?tab=testimonials" class="quick-card"><div class="qi">💬</div><div class="qt">Testimonials</div><div class="qs">Customer reviews</div></a>
     <a href="?tab=contact" class="quick-card"><div class="qi">📞</div><div class="qt">Contact Info</div><div class="qs">WhatsApp, email, social</div></a>
     <a href="?tab=password" class="quick-card"><div class="qi">🔐</div><div class="qt">Security</div><div class="qs">Change admin password</div></a>
+    <a href="../crm.html" target="_blank" class="quick-card" style="border-color:rgba(201,169,110,.4);"><div class="qi">👥</div><div class="qt">Customer CRM</div><div class="qs">Manage clients & appointments</div></a>
   </div>
   <?php endif; ?>
 
